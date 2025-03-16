@@ -1,0 +1,9 @@
+services:
+  projectdiscovery:
+    container_name: projectdiscovery
+    build:
+      - ./DockerFile
+    volumes:
+      - 
+    networks:
+      - soc-net
