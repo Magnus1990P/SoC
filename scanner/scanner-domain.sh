@@ -12,9 +12,10 @@ echo -n "" > $TF_NAABU
 echo -n "" > $TF_NUCLEI
 
 ./subfinder -silent \
-	-dL "subfinder-domain_targets.txt" \
-	-t 25 -rl 250 -timeout 5 \
-	-recursive -rL "$TF_DNS" \
+	-dL "subfinder-domain_targets-active.txt" \
+	-t 50 -rl 500 -timeout 3 \
+	-recursive \
+	-rL "$TF_DNS" \
 	-nW -oI -oJ -o "./temp-subfinder-results.jsonl" | \
 while read -r JSON; do
 	IDENTIFIER=$(echo $JSON | md5sum | awk '{print $1}');
