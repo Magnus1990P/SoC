@@ -8,7 +8,7 @@ SUBFINDER_TARGET_LIST="./subfinder-domain_targets-active.txt"
 TF_NAABU="./temp-naabu-targets.txt"
 TF_DNS="./resolvers.txt"
 
-echo -n "" > $TF_NAABU
+cat $SUBFINDER_TARGET_LIST > $TF_NAABU
 
 ############################
 ##	HOST ENUMERATION
