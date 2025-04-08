@@ -1,0 +1,15 @@
+#allow-list:
+#  severity: []
+#  tags: []
+#deny-list:
+#  severity: []
+#  tags: []
+elasticsearch:
+  host: "127.0.0.1"
+  ip: "127.0.0.1"
+  port: 9200
+  ssl: true
+  ssl-verification: false
+  username: "admin"
+  password: "ChangeMe"
+  index-name: "scan-vulnerability"
