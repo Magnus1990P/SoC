@@ -39,7 +39,7 @@ services:
       OS_HOST: "https://127.0.0.1:9200"
       OS_INDEX: "scan-dns"
       OS_USER: "admin"
-      OS_PASSWD: "Halo-Investigate-Aligator-2025-Suits"
+      OS_PASSWD: "ChangeMe"
 
 configs:
   targets_domain:
