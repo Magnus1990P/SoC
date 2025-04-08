@@ -1,0 +1,67 @@
+services:
+  subfinder:
+    image: projectdiscovery/subfinder:latest
+    container_name: subfinder
+    volumes:
+      - $PWD/data:/data
+    configs:
+      - source: subfinder_cfg
+        target: /root/.config/subfinder/config.yaml
+      - source: subfinder_provider
+        target: /root/.config/subfinder/provider-config.yaml
+      - source: resolver
+        target: /tmp/resolvers-dns.txt
+      - source: targets_domain
+        target: /tmp/targets.txt
+    environment:
+      OS_HOST: "https://127.0.0.1:9200"
+      OS_INDEX: "scan-dns"
+      OS_USER: "admin"
+      OS_PASSWD: "Halo-Investigate-Aligator-2025-Suits"
+
+  naabu:
+    image: projectdiscovery/naabu:latest
+    container_name: naabu
+    volumes:
+      - $PWD/data:/data
+    configs:
+      - source: naabu_cfg
+        target: /root/.config/naabu/config.yaml
+      - source: resolver
+        target: /tmp/resolvers-dns.txt
+      - source: targets_hosts
+        target: /tmp/targets.txt
+      - source: ports_exclude
+        target: /tmp/ports-exclude.txt
+      - source: hosts-exclude
+        target: /tmp/hosts-exclude.txt
+    environment:
+      OS_HOST: "https://127.0.0.1:9200"
+      OS_INDEX: "scan-dns"
+      OS_USER: "admin"
+      OS_PASSWD: "Halo-Investigate-Aligator-2025-Suits"
+
+configs:
+  targets_domain:
+    file: ./config/targets-domain.txt
+  targets_hosts:
+    file: ./config/targets-hosts.txt
+
+  resolver:
+    file: ./config/resolvers-dns.txt
+
+  port_list:
+    file: ./config/ports-default.txt
+  ports_exclude:
+    file: ./config/ports-exclude.txt
+
+  hosts-exclude:
+    file: ./config/hosts-exclude.txt
+
+  naabu_cfg:
+    file: ./config/naabu-config.yaml
+
+  subfinder_cfg:
+    file: ./config/subfinder-config.yaml
+  subfinder_provider:
+    file: ./config/subfinder-provider.yaml
