@@ -1,4 +1,22 @@
 services:
+  dnsx:
+    image: projectdiscovery/dnsx:latest
+    container_name: dnsx
+    volumes:
+      - $PWD/data:/data
+    configs:
+      - source: dnsx_cfg
+        target: /root/.config/dnsx/config.yaml
+      - source: resolver
+        target: /tmp/resolvers-dns.txt
+      - source: targets_domain
+        target: /tmp/targets.txt
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '1G'
+
   subfinder:
     image: projectdiscovery/subfinder:latest
     container_name: subfinder
@@ -13,11 +31,11 @@ services:
         target: /tmp/resolvers-dns.txt
       - source: targets_domain
         target: /tmp/targets.txt
-    environment:
-      OS_HOST: "https://127.0.0.1:9200"
-      OS_INDEX: "scan-dns"
-      OS_USER: "admin"
-      OS_PASSWD: "Halo-Investigate-Aligator-2025-Suits"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '1G'
 
   naabu:
     image: projectdiscovery/naabu:latest
@@ -35,17 +53,44 @@ services:
         target: /tmp/ports-exclude.txt
       - source: hosts-exclude
         target: /tmp/hosts-exclude.txt
-    environment:
-      OS_HOST: "https://127.0.0.1:9200"
-      OS_INDEX: "scan-dns"
-      OS_USER: "admin"
-      OS_PASSWD: "ChangeMe"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '1G'
+
+  nuclei:
+    image: projectdiscovery/nuclei:latest
+    container_name: nuclei
+    volumes:
+      - $PWD/data:/data
+      - $PWD/nuclei-templates:/nuclei-templates
+    networks:
+      - opensearch_public-net
+    configs:
+      - source: nuclei_cfg
+        target: /root/.config/nuclei/config.yaml
+      - source: nuclei_reporting
+        target: /root/.config/nuclei/reporting-config.yaml
+      - source: resolver
+        target: /tmp/resolvers-dns.txt
+      - source: targets_services
+        target: /tmp/targets.txt
+      - source: nuclei_ignored
+        target: /root/.config/nuclei/.nuclei-ignore
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '1G'
 
 configs:
   targets_domain:
     file: ./config/targets-domain.txt
   targets_hosts:
     file: ./config/targets-hosts.txt
+  targets_services:
+    file: ./config/targets-services.txt
 
   resolver:
     file: ./config/resolvers-dns.txt
@@ -58,10 +103,24 @@ configs:
   hosts-exclude:
     file: ./config/hosts-exclude.txt
 
+  dnsx_cfg:
+    file: ./config/dnsx-config.yaml
+
   naabu_cfg:
     file: ./config/naabu-config.yaml
+
+  nuclei_cfg:
+    file: ./config/nuclei-config.yaml
+  nuclei_reporting:
+    file: ./config/nuclei-reporting.yaml
+  nuclei_ignored:
+    file: ./config/nuclei-ignored-templates.txt
 
   subfinder_cfg:
     file: ./config/subfinder-config.yaml
   subfinder_provider:
     file: ./config/subfinder-provider.yaml
+
+networks:
+  opensearch_public-net: #REUSE opensearch network for nuclei scan
+    external: true
