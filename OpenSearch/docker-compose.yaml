@@ -3,22 +3,29 @@ services:
     image: opensearchproject/opensearch:latest
     container_name: opensearch
     environment:
-      - cluster.name=soc-cluster
-      - node.name=opensearch
-      - discovery.seed_hosts=opensearch
-      - cluster.initial_master_nodes=opensearch
-      - action.auto_create_index:true
-      - compatibility.override_main_response_version:true
-      - bootstrap.memory_lock=true
-      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
-      - "DISABLE_SECURITY_PLUGIN=true"
+      cluster.name: soc-cluster
+      node.name: opensearch
+      discovery.type: single-node
+      bootstrap.memory_lock: true
+      OPENSEARCH_JAVA_OPTS: -Xms512m -Xmx512m
+      action.auto_create_index: false
+      OPENSEARCH_INITIAL_ADMIN_PASSWORD: ${OS_ADMIN_PASSWORD}
     volumes:
       - opensearch-data:/usr/share/opensearch/data
     ports:
       - 0.0.0.0:9200:9200
     networks:
-      - soc-net
       - public-net
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536 # maximum number of open files for the OpenSearch user, set to at least 65536 on modern systems
+        hard: 65536
+    healthcheck:
+      test: "curl -kf https://localhost:9200"
+    restart: unless-stopped
 
   opensearch-dashboards:
     image: opensearchproject/opensearch-dashboards:latest
@@ -28,14 +35,18 @@ services:
     environment:
       - 'OPENSEARCH_HOSTS=["https://opensearch:9200"]'
     networks:
-      - soc-net
       - public-net
-    volumes:
-      - ./config/opensearch_dashboards.yml:/usr/share/opensearch-dashboards/config/opensearch_dashboards.yml
+    depends_on:
+      - opensearch
+    #volumes:
+    #  - opensearch-dashboard:/usr/share/opensearch-dashboards/config/
+    healthcheck:
+      test: "curl -kf https://localhost:5601"
+    restart: unless-stopped
 
 volumes:
-  opensearch-data1:
+  opensearch-data:
+  #opensearch-dashboard:
 
 networks:
-  soc-net:
   public-net:
