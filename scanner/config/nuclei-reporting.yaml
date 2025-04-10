@@ -5,11 +5,11 @@
 #  severity: []
 #  tags: []
 elasticsearch:
-  host: "127.0.0.1"
+  host: "opensearch"
   ip: "127.0.0.1"
   port: 9200
   ssl: true
   ssl-verification: false
   username: "admin"
-  password: "ChangeMe"
+  password: "CHANGE_ME"
   index-name: "scan-vulnerability"
