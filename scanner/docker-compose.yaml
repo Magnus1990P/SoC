@@ -49,10 +49,10 @@ services:
         target: /tmp/resolvers-dns.txt
       - source: targets_hosts
         target: /tmp/targets.txt
-      - source: ports_exclude
-        target: /tmp/ports-exclude.txt
-      - source: hosts-exclude
-        target: /tmp/hosts-exclude.txt
+      #- source: ports_exclude
+      #  target: /tmp/ports-exclude.txt
+      #- source: hosts-exclude
+      #  target: /tmp/hosts-exclude.txt
     deploy:
       resources:
         limits:
