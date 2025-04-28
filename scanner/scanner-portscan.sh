@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 OSURL="$1"
 OSUSER="$2"
 OSPASSWD="$3"
