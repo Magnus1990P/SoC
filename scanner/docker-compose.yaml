@@ -12,8 +12,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.25'
-          memory: '500M'
+          cpus: '0.5'
+          memory: '1G'
 
   dnsx:
     image: projectdiscovery/dnsx:latest
@@ -50,8 +50,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: '1G'
+          cpus: '1'
+          memory: '2G'
 
   naabu:
     image: projectdiscovery/naabu:latest
@@ -72,8 +72,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: '1G'
+          cpus: '1'
+          memory: '2G'
 
   nuclei:
     image: projectdiscovery/nuclei:latest
@@ -97,8 +97,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: '1G'
+          cpus: '3'
+          memory: '5G'
 
 configs:
   targets_domain:
