@@ -1,0 +1,25 @@
+list: "/tmp/targets.txt"
+
+sources: ["alienvault", "anubis", "c99", "commoncrawl", "crtsh", "digitorus", "dnsdumpster", "hackertarget", "hudsonrock", "intelx", "rapiddns", "shodan", "sitedossier", "threatcrowd", "waybackarchive", "virustotal"]
+
+recursive: true
+all: false
+
+rate-limit: 0
+t: 300
+disable-update-check: true
+output: "/data/OUTPUT-subfinder.jsonl"
+json: true
+
+ip: false
+
+rlist: "/tmp/resolvers-dns.txt"
+
+active: true
+silent: true
+
+version: false
+v: false
+timeout: 2
+
+collect-sources: true

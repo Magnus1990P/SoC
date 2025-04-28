@@ -1,4 +1,20 @@
 services:
+  tlsx:
+    image: projectdiscovery/tlsx:latest
+    container_name: tlsx
+    volumes:
+      - $PWD/data:/data
+    configs:
+      - source: tlsx_cfg
+        target: /root/.config/tlsx/config.yaml
+      - source: targets_hosts
+        target: /tmp/targets.txt
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: '500M'
+
   dnsx:
     image: projectdiscovery/dnsx:latest
     container_name: dnsx
@@ -49,8 +65,8 @@ services:
         target: /tmp/resolvers-dns.txt
       - source: targets_hosts
         target: /tmp/targets.txt
-      #- source: ports_exclude
-      #  target: /tmp/ports-exclude.txt
+      - source: ports_exclude
+        target: /tmp/ports-exclude.txt
       #- source: hosts-exclude
       #  target: /tmp/hosts-exclude.txt
     deploy:
@@ -102,6 +118,9 @@ configs:
 
   hosts-exclude:
     file: ./config/hosts-exclude.txt
+
+  tlsx_cfg:
+    file: ./config/tlsx-config.yaml
 
   dnsx_cfg:
     file: ./config/dnsx-config.yaml

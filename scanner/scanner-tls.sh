@@ -3,19 +3,19 @@ OSURL="$1"
 OSUSER="$2"
 OSPASSWD="$3"
 
-OUT_DNSX="./data/OUTPUT-dnsx.jsonl"
-rm -f "$OUT_DNS"
+OUT_TLSX="./data/OUTPUT-tlsx.jsonl"
+rm -f "$OUT_TLSX"
 
-docker compose run --remove-orphans -it dnsx
+docker compose run --remove-orphans -it tlsx
 
-cat "$OUT_DNSX" | \
+cat "$OUT_TLSX" | \
 while read -r JSON; do 
 	IDENTIFIER=$(echo "$JSON" | md5sum | awk '{print $1}');
 	if [[ -z "$JSON" ]]; then
 		echo "$IDENTIFIER - $TARGET - NO DETECTIONS";
 	else
 		HNAME=$(jq -r '.host' <<< "$JSON")
-		curl -u "$OSUSER:$OSPASSWD" -k -XPOST "$OSURL/scan-dnsx/_doc/$IDENTIFIER" --json "$JSON" --silent 1>/dev/null
-		echo "DNSX DISCOVERED: $HNAME";
+		curl -u "$OSUSER:$OSPASSWD" -k -XPOST "$OSURL/scan-tlsx/_doc/$IDENTIFIER" --json "$JSON" --silent 1>/dev/null
+		echo "TLS DISCOVERED: $HNAME";
 	fi
 done;
