@@ -6,7 +6,7 @@ OSUSER="$2"
 OSPASSWD="$3"
 
 # WORKINGDIR
-cd "/home/admin/SoC/scanner"
+cd "$4"
 
 ## VARIABLE CONFIG
 TF_SUBFINDER="./config/targets-domain.txt"
