@@ -24,7 +24,7 @@ services:
         soft: 65536 # maximum number of open files for the OpenSearch user, set to at least 65536 on modern systems
         hard: 65536
     healthcheck:
-      test: "curl -kf https://localhost:9200"
+      test: "curl -kf https://admin:${OS_ADMIN_PASSWORD}@localhost:9200"
     restart: unless-stopped
 
   opensearch-dashboards:
@@ -38,15 +38,12 @@ services:
       - public-net
     depends_on:
       - opensearch
-    #volumes:
-    #  - opensearch-dashboard:/usr/share/opensearch-dashboards/config/
     healthcheck:
-      test: "curl -kf https://localhost:5601"
+      test: "curl -kf http://localhost:5601"
     restart: unless-stopped
 
 volumes:
   opensearch-data:
-  #opensearch-dashboard:
 
 networks:
   public-net:

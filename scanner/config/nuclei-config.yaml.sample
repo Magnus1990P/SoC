@@ -1,12 +1,11 @@
 list: "/tmp/targets.txt" 
 resume: false
 scan-all-ips: true
-#input-mode: list
 
 report-config: "/root/.config/nuclei/reporting-config.yaml"
 
 new-templates: false
-automatic-scan: true
+automatic-scan: false
 validate: false
 no-strict-syntax: false
 template-display: false
@@ -16,22 +15,41 @@ template-display: false
 disable-unsigned-templates: false
 
 # templates to run based on severity. possible values: info, low, medium, high, critical, unknown
-#severity: low, medium, high, critical
-#severity: info
-# templates to exclude based on severity. possible values: info, low, medium, high, critical, unknown
-#exclude-severity: info, unknown, low, medium
+severity:
+  - critical
+  - high
+  - medium
+  - unknown
+  - low
+#  - info
+exclude-severity:
+  - info
+#  - low
+#  - unknown
 
-# templates to run based on protocol type. possible values: dns, file, http, headless, tcp, workflow, ssl, websocket, whois, code, javascript
-type: dns,file,http,tcp,ssl,whois,javascript
-# templates to exclude based on protocol type. possible values: dns, file, http, headless, tcp, workflow, ssl, websocket, whois, code, javascript
-exclude-type: workflow,headless,code
+type:
+  - cloud
+  - dns
+  - file
+  - http
+  - javascript
+  - network
+  - ssl
+exclude-type:
+  - passive
+  - code
+  - dast
+  - headless
+  - workflows
+#exclude-templates:
+#  - http/technologies/tech-detect
 
 # output file to write found issues/vulnerabilities
 output: "/data/OUTPUT-nuclei.json"
 store-resp: false
-store-resp-dir: "/data/nuclei"
+#store-resp-dir: "/data/nuclei"
 silent: false
-jsonl: false
+jsonl: true
 omit-raw: true
 jsonl-export: "/data/OUTPUT-nuclei.jsonl" 
 
@@ -41,7 +59,7 @@ max-redirects: 3
 disable-redirects: false
 
 # custom header/cookie to include in all http request in header:value format (cli, file)
-header: ["KITSEC:SCANNING-DANKOJONES-MAGNUS"]
+header: ["SECURITYSCANNING:SCANNING-DANKOJONES-VIVALASVEGAS"]
 
 # file containing resolver list for nuclei
 resolvers: "/tmp/resolvers-dns.txt"
@@ -49,37 +67,23 @@ disable-clustering: false
 force-http2: false
 
 # use ztls library with autofallback to standard one for tls13 [deprecated] autofallback to ztls is enabled by default
-#ztls: false
+ztls: true
 
 # keep-alive duration for network requests.
-#dialer-keep-alive: 
+#dialer-keep-alive: 10 
 
 # type of payload combinations to perform (batteringram,pitchfork,clusterbomb)
 #attack-type: 
 
+# enable / run dast (fuzz) nuclei templates
+dast: false
 # overrides fuzzing type set in template (replace, prefix, postfix, infix)
 #fuzzing-type: 
-
 # overrides fuzzing mode set in template (multiple, single)
 #fuzzing-mode: 
-
-# enable loading fuzzing templates (deprecated: use -dast instead)
-#fuzz: false
-
-# enable / run dast (fuzz) nuclei templates
-#dast: false
-
-# enable dast server mode (live fuzzing)
-#dast-server: false
-
-# display fuzz points in the output for debugging
-#display-fuzz-points: false
-
-# frequency of uninteresting parameters for fuzzing before skipping
-#fuzz-param-frequency: 10
-
-# fuzzing aggression level controls payload count for fuzz (low, medium, high)
-#fuzz-aggression: low
+display-fuzz-points: false
+fuzz-param-frequency: 10
+fuzz-aggression: low
 
 # in scope url regex to be followed by fuzzer
 #fuzz-scope: []
@@ -89,93 +93,72 @@ force-http2: false
 
 # enable uncover engine
 #uncover: false
-
 # uncover search query
 #uncover-query: []
-
 # uncover search engine (shodan,censys,fofa,shodan-idb,quake,hunter,zoomeye,netlas,criminalip,publicwww,hunterhow,google,odin,binaryedge) (default shodan)
 #uncover-engine: []
-
 # uncover fields to return (ip,port,host)
 #uncover-field: ip:port
-
 # uncover results to return
 #uncover-limit: 100
-
 # override ratelimit of engines with unknown ratelimit (default 60 req/min)
 #uncover-ratelimit: 60
 
 # strategy to use while scanning(auto/host-spray/template-spray)
 #scan-strategy: auto
-scan-strategy: host-spray
-#scan-strategy: template-spray
-
-# maximum number of requests to send per second
-rate-limit: 250
-
-# maximum number of hosts to be analyzed in parallel per template
-bulk-size: 50
+#scan-strategy: host-spray
+scan-strategy: template-spray
 
 # maximum number of templates to be executed in parallel
-concurrency: 25
+concurrency: 2
+
+# maximum number of hosts to be analyzed in parallel per template
+bulk-size: 100
+
+# maximum number of requests to send per second
+rate-limit: 1000
 
 # maximum number of headless hosts to be analyzed in parallel per template
 #headless-bulk-size: 10
-
 # maximum number of headless templates to be executed in parallel
 #headless-concurrency: 10
 
 # maximum number of javascript runtimes to be executed in parallel
-#js-concurrency: 120
+js-concurrency: 200
 
 # max payload concurrency for each template
-#payload-concurrency: 25
+payload-concurrency: 50
 
 # http probe concurrency with httpx
-probe-concurrency: 100
+probe-concurrency: 250
 
-timeout: 3
-retries: 1
+timeout: 2
+retries: 2
 
 leave-default-ports: false
 
-# max errors for a host before skipping from scan
-#max-host-error: 25
-
 # disable skipping host from scan based on errors
 no-mhe: true
+# max errors for a host before skipping from scan
+#max-host-error: 100
 
 # use a project folder to avoid sending same request multiple times
 project: true
-
 project-path: "/tmp"
 
 stop-at-first-match: false
 stream: true
+no-stdin: true
 
 # disable httpx probing for non-url input
 #no-httpx: false
 
-# disable stdin processing
-#no-stdin: false
-
-# enable templates that require headless browser support (root user on linux will disable sandbox)
-#headless: false
-
-# seconds to wait for each page in headless mode
-page-timeout: 3
+headless: false
+page-timeout: 5
 show-browser: false
-
-# start headless chrome with additional options
 #headless-options: []
-
-# use local installed chrome browser instead of nuclei installed
 #system-chrome: false
-
-# list available headless actions
 #list-headless-action: false
-
-# list all supported dsl function signatures
 #list-dsl-function: false
 
 version: false
@@ -183,5 +166,5 @@ vv: false
 debug: false
 health-check: false
 update-templates: false
-update-template-dir: "/nuclei-templates" 
+update-template-dir: "/data/nuclei-templates" 
 disable-update-check: true

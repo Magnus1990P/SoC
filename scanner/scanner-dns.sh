@@ -3,11 +3,13 @@ OSURL="$1"
 OSUSER="$2"
 OSPASSWD="$3"
 
+###################################################
+##  DNSX scan
+###################################################
 OUT_DNSX="./data/OUTPUT-dnsx.jsonl"
-rm -f "$OUT_DNS"
+rm -f "$OUT_DNSX"
 
-docker compose run --remove-orphans -it dnsx
-
+docker compose run --remove-orphans -it dnsx && \
 cat "$OUT_DNSX" | \
 while read -r JSON; do 
 	IDENTIFIER=$(echo "$JSON" | md5sum | awk '{print $1}');

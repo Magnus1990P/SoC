@@ -5,8 +5,8 @@ sources: ["alienvault", "anubis", "c99", "commoncrawl", "crtsh", "digitorus", "d
 recursive: true
 all: false
 
-rate-limit: 0
-t: 300
+rate-limit: 3000
+t: 500
 disable-update-check: true
 output: "/data/OUTPUT-subfinder.jsonl"
 json: true
@@ -16,10 +16,10 @@ ip: false
 rlist: "/tmp/resolvers-dns.txt"
 
 active: true
-silent: true
+silent: false
 
 version: false
 v: false
-timeout: 2
+timeout: 5
 
 collect-sources: true

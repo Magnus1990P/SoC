@@ -1,5 +1,10 @@
 list: "/tmp/targets.txt"
-port: [443,8443,10443,444]
+port:
+  - 22
+  - 443
+  - 8443
+  - 10443
+  - 444
 
 # tls connection mode to use (ctls, ztls, openssl, auto)
 scan-mode: "auto"
@@ -45,7 +50,13 @@ mismatched: true
 revoked: true
 untrusted: true
 
-resolvers: ["1.1.1.1", "8.8.4.4", "8.8.8.8"]
+resolvers:
+  - 9.9.9.9
+  - 1.0.0.1
+  - 76.223.122.150
+  - 76.76.10.0
+  - 149.112.112.112
+  - 8.8.4.4
 
 # perform reverse ptr to retrieve sni from ip
 #rev-ptr-sni: false
@@ -98,4 +109,3 @@ no-color: false
 verbose: false
 version: false
 hc: false
-

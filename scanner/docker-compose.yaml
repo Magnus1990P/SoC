@@ -12,8 +12,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: '1G'
+          cpus: '3'
+          memory: '3G'
 
   dnsx:
     image: projectdiscovery/dnsx:latest
@@ -30,8 +30,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: '1G'
+          cpus: '3'
+          memory: '3G'
 
   subfinder:
     image: projectdiscovery/subfinder:latest
@@ -50,8 +50,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '1'
-          memory: '2G'
+          cpus: '3'
+          memory: '3G'
 
   naabu:
     image: projectdiscovery/naabu:latest
@@ -72,17 +72,14 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '1'
-          memory: '2G'
+          cpus: '3'
+          memory: '3G'
 
   nuclei:
     image: projectdiscovery/nuclei:latest
     container_name: nuclei
     volumes:
       - $PWD/data:/data
-      - $PWD/nuclei-templates:/nuclei-templates
-    networks:
-      - opensearch_public-net
     configs:
       - source: nuclei_cfg
         target: /root/.config/nuclei/config.yaml
@@ -97,8 +94,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '3'
-          memory: '5G'
+          cpus: '4'
+          memory: '4G'
 
 configs:
   targets_domain:
@@ -139,7 +136,3 @@ configs:
     file: ./config/subfinder-config.yaml
   subfinder_provider:
     file: ./config/subfinder-provider.yaml
-
-networks:
-  opensearch_public-net: #REUSE opensearch network for nuclei scan
-    external: true
