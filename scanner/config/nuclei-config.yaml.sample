@@ -5,7 +5,7 @@ scan-all-ips: true
 report-config: "/root/.config/nuclei/reporting-config.yaml"
 
 new-templates: false
-automatic-scan: false
+automatic-scan: true
 validate: false
 no-strict-syntax: false
 template-display: false
@@ -19,11 +19,11 @@ severity:
   - critical
   - high
   - medium
-  - unknown
-  - low
-#  - info
-exclude-severity:
+#  - unknown
+#  - low
   - info
+exclude-severity:
+#  - info
 #  - low
 #  - unknown
 
@@ -32,8 +32,8 @@ type:
   - dns
   - file
   - http
-  - javascript
-  - network
+  #- javascript
+  #- network
   - ssl
 exclude-type:
   - passive
@@ -45,13 +45,12 @@ exclude-type:
 #  - http/technologies/tech-detect
 
 # output file to write found issues/vulnerabilities
-output: "/data/OUTPUT-nuclei.json"
+output: "/data/OUTPUT-nuclei.jsonl"
 store-resp: false
 #store-resp-dir: "/data/nuclei"
 silent: false
 jsonl: true
-omit-raw: true
-jsonl-export: "/data/OUTPUT-nuclei.jsonl" 
+omit-raw: false
 
 follow-redirects: false
 follow-host-redirects: false
@@ -59,7 +58,7 @@ max-redirects: 3
 disable-redirects: false
 
 # custom header/cookie to include in all http request in header:value format (cli, file)
-header: ["SECURITYSCANNING:SCANNING-DANKOJONES-VIVALASVEGAS"]
+header: ["KITSEC:SCANNING-FOR-VULNERABILITIES-CONTACT-FOR-INFORMATION"]
 
 # file containing resolver list for nuclei
 resolvers: "/tmp/resolvers-dns.txt"
@@ -70,7 +69,7 @@ force-http2: false
 ztls: true
 
 # keep-alive duration for network requests.
-#dialer-keep-alive: 10 
+dialer-keep-alive: 5
 
 # type of payload combinations to perform (batteringram,pitchfork,clusterbomb)
 #attack-type: 
@@ -110,13 +109,13 @@ fuzz-aggression: low
 scan-strategy: template-spray
 
 # maximum number of templates to be executed in parallel
-concurrency: 2
+concurrency: 1
 
 # maximum number of hosts to be analyzed in parallel per template
-bulk-size: 100
+bulk-size: 10
 
 # maximum number of requests to send per second
-rate-limit: 1000
+rate-limit: 2000
 
 # maximum number of headless hosts to be analyzed in parallel per template
 #headless-bulk-size: 10
@@ -124,13 +123,13 @@ rate-limit: 1000
 #headless-concurrency: 10
 
 # maximum number of javascript runtimes to be executed in parallel
-js-concurrency: 200
+js-concurrency: 100
 
 # max payload concurrency for each template
 payload-concurrency: 50
 
 # http probe concurrency with httpx
-probe-concurrency: 250
+probe-concurrency: 300
 
 timeout: 2
 retries: 2
@@ -143,7 +142,7 @@ no-mhe: true
 #max-host-error: 100
 
 # use a project folder to avoid sending same request multiple times
-project: true
+project: false
 project-path: "/tmp"
 
 stop-at-first-match: false
@@ -154,7 +153,7 @@ no-stdin: true
 #no-httpx: false
 
 headless: false
-page-timeout: 5
+page-timeout: 2
 show-browser: false
 #headless-options: []
 #system-chrome: false

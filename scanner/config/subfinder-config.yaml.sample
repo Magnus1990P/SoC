@@ -20,6 +20,6 @@ silent: false
 
 version: false
 v: false
-timeout: 5
+timeout: 2
 
 collect-sources: true

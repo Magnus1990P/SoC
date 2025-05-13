@@ -1,4 +1,6 @@
-l: /tmp/targets.txt
+# 
+l: "/tmp/targets.txt"
+
 # excluded hosts
 #ef: "/tmp/hosts-exclude.txt"
 
@@ -15,10 +17,10 @@ ec: true
 cdn: true
 
 # thread count
-c: 400
+c: 500
 
 # packets per sec
-rate: 2500
+rate: 4000
 
 # disable automatic naabu update check
 disable-update-check: true
@@ -34,24 +36,18 @@ sa: true
 s: c
 
 nmap: false
-
-# resume scan using resume.cfg
 resume: false
-
-# display passive open ports using shodan internetdb api
-#passive: true
+passive: false
 
 # list of custom resolver dns resolution (comma separated or from file)
 r: "/tmp/resolvers-dns.txt" 
 
 # skip host discovery
-#skip-host-discovery: false
+skip-host-discovery: true
 
 # enable host discovery
-with-host-discovery: true
+with-host-discovery: false
 
-#probe-tcp-syn: []
-#probe-tcp-ack: []
 #probe-icmp-echo: true
 arp-ping: false
 
@@ -59,16 +55,16 @@ service-discovery: false
 service-version: false
 
 # number of retries for the port scan
-retries: 1
+retries: 2
 
 # millisecond to wait before timing out
-timeout: 1000
+timeout: 2000
 
 # ping probes for verification of host
 #ping: true
 
 # validate the ports again with tcp verification
-verify: true
+verify: false
 
 # display only results in output
 silent: false

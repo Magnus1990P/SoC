@@ -6,7 +6,7 @@ OSPASSWD="$3"
 OUT_TLSX="./data/OUTPUT-tlsx.jsonl"
 rm -f "$OUT_TLSX"
 
-docker compose run --remove-orphans -it tlsx
+tlsx
 
 cat "$OUT_TLSX" | while read -r JSON; do 
 	IDENTIFIER=$(echo "$JSON" | md5sum | awk '{print $1}');

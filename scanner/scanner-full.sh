@@ -9,12 +9,9 @@ OSPASSWD="$3"
 WORKINGDIR="$4"
 cd "$WORKINGDIR"
 
-echo "$OSURL"
-echo "$OSUSER / $OSPASSWD"
-
 ###################################################
 ##  DNSX scan
-#./scanner-dns.sh "$OSURL" "$OSUSER" "$OSPASSWD" 
+./scanner-dns.sh "$OSURL" "$OSUSER" "$OSPASSWD" 
 ##
 ##  HOST enumeration scan
 ./scanner-host_enum.sh "$OSURL" "$OSUSER" "$OSPASSWD"
@@ -26,4 +23,4 @@ echo "$OSUSER / $OSPASSWD"
 ./scanner-port.sh "$OSURL" "$OSUSER" "$OSPASSWD"
 ###################################################
 ##  NUCLEI SCAN
-docker compose run --remove-orphans --rm -it nuclei
+nuclei

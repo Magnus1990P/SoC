@@ -83,19 +83,19 @@ tls-chain: true
 #hardfail: false
 
 # number of concurrent threads to process
-concurrency: 150
+concurrency: 500
 
 # cipher enum concurrency for each target
-cipher-concurrency: 10
+cipher-concurrency: 25
 
 # tls connection timeout in seconds
-timeout: 5
+timeout: 3
 
 # number of retries to perform for failures
 retry: 2
 
 # duration to wait between each connection per thread (eg: 200ms, 1s)
-#delay: 
+#delay: 250ms
 
 update: false
 disable-update-check: false

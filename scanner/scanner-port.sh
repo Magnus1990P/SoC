@@ -8,7 +8,7 @@ echo -n "" > $TF_NUCLEI
 OUT_NAABU="./data/OUTPUT-naabu.jsonl"
 rm -f "$OUT_NAABU"
 
-docker compose run --remove-orphans -it naabu
+naabu
 
 cat "$OUT_NAABU" | grep -v '^null:' | \
 while read -r JSON; do

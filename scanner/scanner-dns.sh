@@ -9,7 +9,8 @@ OSPASSWD="$3"
 OUT_DNSX="./data/OUTPUT-dnsx.jsonl"
 rm -f "$OUT_DNSX"
 
-docker compose run --remove-orphans -it dnsx && \
+dnsx
+
 cat "$OUT_DNSX" | \
 while read -r JSON; do 
 	IDENTIFIER=$(echo "$JSON" | md5sum | awk '{print $1}');

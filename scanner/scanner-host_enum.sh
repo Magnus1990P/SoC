@@ -5,11 +5,13 @@ OSPASSWD="$3"
 
 TF_SUBFINDER="./config/targets-domain.txt"
 TF_NAABU="./config/targets-hosts.txt"
+echo "" -n > $TF_NAABU
 OUT_SUBFINDER="./data/OUTPUT-subfinder.jsonl"
 rm -f "$OUT_SUBFINDER"
 
 ts=$(date +"%Y-%m-%dT%H:%M:%S%z")
-docker compose run --remove-orphans -it subfinder
+
+subfinder
 
 cat "$OUT_SUBFINDER" | \
 while read -r JSON; do 
@@ -27,4 +29,3 @@ done;
 
 cat "$TF_SUBFINDER" "$TF_NAABU" | grep -v '^null:' | sort | uniq > .tmp
 mv .tmp "$TF_NAABU"
-

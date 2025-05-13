@@ -28,8 +28,8 @@ cdn: true
 # display host asn information
 asn: true
 
-threads: 300
-rate-limit: 750
+threads: 400
+rate-limit: 2000
 
 disable-update-check: true
 
