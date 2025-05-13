@@ -8,7 +8,7 @@ all: false
 rate-limit: 3000
 t: 500
 disable-update-check: true
-output: "/data/OUTPUT-subfinder.jsonl"
+output: "/tmp/OUTPUT-subfinder.jsonl"
 json: true
 
 ip: false

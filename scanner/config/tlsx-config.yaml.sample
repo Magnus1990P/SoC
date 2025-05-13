@@ -1,4 +1,4 @@
-list: "/tmp/targets.txt"
+list: "/tmp/targets-hosts.txt"
 port:
   - 22
   - 443
@@ -99,7 +99,7 @@ retry: 2
 
 update: false
 disable-update-check: false
-output: "/data/OUTPUT-tlsx.jsonl"
+output: "/tmp/OUTPUT-tlsx.jsonl"
 json: true
 dns: true
 

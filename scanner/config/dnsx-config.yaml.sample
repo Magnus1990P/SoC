@@ -1,4 +1,4 @@
-list: "/tmp/targets.txt"
+list: "/tmp/targets-domain.txt"
 
 a: true
 aaaa: true
@@ -33,7 +33,7 @@ rate-limit: 2000
 
 disable-update-check: true
 
-output: "/data/OUTPUT-dnsx.jsonl"
+output: "/tmp/OUTPUT-dnsx.jsonl"
 json: true
 
 # omit raw dns response from jsonl output

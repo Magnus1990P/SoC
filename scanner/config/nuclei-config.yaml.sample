@@ -1,4 +1,4 @@
-list: "/tmp/targets.txt" 
+list: "/tmp/targets-services.txt" 
 resume: false
 scan-all-ips: true
 
@@ -45,9 +45,9 @@ exclude-type:
 #  - http/technologies/tech-detect
 
 # output file to write found issues/vulnerabilities
-output: "/data/OUTPUT-nuclei.jsonl"
+output: "/tmp/OUTPUT-nuclei.jsonl"
 store-resp: false
-#store-resp-dir: "/data/nuclei"
+#store-resp-dir: "/tmp/nuclei"
 silent: false
 jsonl: true
 omit-raw: false
@@ -164,6 +164,6 @@ version: false
 vv: false
 debug: false
 health-check: false
-update-templates: false
-update-template-dir: "/data/nuclei-templates" 
+update-templates: true
+#update-template-dir: "/tmp/nuclei-templates" 
 disable-update-check: true

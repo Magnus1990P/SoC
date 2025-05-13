@@ -3,9 +3,9 @@ OSURL="$1"
 OSUSER="$2"
 OSPASSWD="$3"
 
-TF_NUCLEI="./config/targets-services.txt"
+TF_NUCLEI="/tmp/targets-services.txt"
 echo -n "" > $TF_NUCLEI
-OUT_NAABU="./data/OUTPUT-naabu.jsonl"
+OUT_NAABU="/tmp/OUTPUT-naabu.jsonl"
 rm -f "$OUT_NAABU"
 
 naabu

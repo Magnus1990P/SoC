@@ -1,5 +1,5 @@
 # 
-l: "/tmp/targets.txt"
+l: "/tmp/targets-hosts.txt"
 
 # excluded hosts
 #ef: "/tmp/hosts-exclude.txt"
@@ -26,7 +26,7 @@ rate: 4000
 disable-update-check: true
 
 # file to write output to (optional)
-output: "/data/OUTPUT-naabu.jsonl"
+output: "/tmp/OUTPUT-naabu.jsonl"
 json: true
 
 # scan all the ip's associated with dns record

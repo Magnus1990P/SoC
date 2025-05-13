@@ -5,10 +5,6 @@ OSURL="$1"
 OSUSER="$2"
 OSPASSWD="$3"
 
-# WORKINGDIR
-WORKINGDIR="$4"
-cd "$WORKINGDIR"
-
 ###################################################
 ##  DNSX scan
 ./scanner-dns.sh "$OSURL" "$OSUSER" "$OSPASSWD" 
@@ -21,6 +17,9 @@ cd "$WORKINGDIR"
 ###################################################
 ##  PORT SCAN
 ./scanner-port.sh "$OSURL" "$OSUSER" "$OSPASSWD"
+###################################################
+##  NUCLEI TEMPLATES
+nuclei-templates --update
 ###################################################
 ##  NUCLEI SCAN
 nuclei

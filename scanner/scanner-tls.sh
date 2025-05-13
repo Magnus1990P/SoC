@@ -3,7 +3,7 @@ OSURL="$1"
 OSUSER="$2"
 OSPASSWD="$3"
 
-OUT_TLSX="./data/OUTPUT-tlsx.jsonl"
+OUT_TLSX="/tmp/OUTPUT-tlsx.jsonl"
 rm -f "$OUT_TLSX"
 
 tlsx

@@ -3,10 +3,10 @@ OSURL="$1"
 OSUSER="$2"
 OSPASSWD="$3"
 
-TF_SUBFINDER="./config/targets-domain.txt"
-TF_NAABU="./config/targets-hosts.txt"
+TF_SUBFINDER="/tmp/targets-domain.txt"
+TF_NAABU="/tmp/targets-hosts.txt"
 echo "" -n > $TF_NAABU
-OUT_SUBFINDER="./data/OUTPUT-subfinder.jsonl"
+OUT_SUBFINDER="/tmp/OUTPUT-subfinder.jsonl"
 rm -f "$OUT_SUBFINDER"
 
 ts=$(date +"%Y-%m-%dT%H:%M:%S%z")
