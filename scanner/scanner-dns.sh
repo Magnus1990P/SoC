@@ -4,7 +4,6 @@
 ##  DNSX scan
 ###################################################
 OUT_DNSX="/tmp/OUTPUT-dnsx.jsonl"
-rm -f "$OUT_DNSX"
 
 dnsx
 
