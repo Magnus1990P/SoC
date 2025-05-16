@@ -1,120 +1,61 @@
 services:
-  tlsx:
-    image: projectdiscovery/tlsx:latest
-    container_name: tlsx
+  scanner:
+    image: scanner:latest
+    container_name: scanner
+    build: .
+    environment:
+      - OPENSEARCH_URL=${OPENSEARCH_URL}
+      - OPENSEARCH_USER=${OPENSEARCH_USER}
+      - OPENSEARCH_PASSWORD=${OPENSEARCH_PASSWORD}
     volumes:
       - $PWD/data:/data
     configs:
-      - source: tlsx_cfg
-        target: /root/.config/tlsx/config.yaml
-      - source: targets_hosts
-        target: /tmp/targets.txt
-    deploy:
-      resources:
-        limits:
-          cpus: '3'
-          memory: '3G'
-
-  dnsx:
-    image: projectdiscovery/dnsx:latest
-    container_name: dnsx
-    volumes:
-      - $PWD/data:/data
-    configs:
-      - source: dnsx_cfg
-        target: /root/.config/dnsx/config.yaml
-      - source: resolver
-        target: /tmp/resolvers-dns.txt
       - source: targets_domain
-        target: /tmp/targets.txt
-    deploy:
-      resources:
-        limits:
-          cpus: '3'
-          memory: '3G'
-
-  subfinder:
-    image: projectdiscovery/subfinder:latest
-    container_name: subfinder
-    volumes:
-      - $PWD/data:/data
-    configs:
-      - source: subfinder_cfg
-        target: /root/.config/subfinder/config.yaml
-      - source: subfinder_provider
-        target: /root/.config/subfinder/provider-config.yaml
+        target: /tmp/targets-domain.txt
       - source: resolver
         target: /tmp/resolvers-dns.txt
-      - source: targets_domain
-        target: /tmp/targets.txt
-    deploy:
-      resources:
-        limits:
-          cpus: '3'
-          memory: '3G'
-
-  naabu:
-    image: projectdiscovery/naabu:latest
-    container_name: naabu
-    volumes:
-      - $PWD/data:/data
-    configs:
-      - source: naabu_cfg
-        target: /root/.config/naabu/config.yaml
-      - source: resolver
-        target: /tmp/resolvers-dns.txt
-      - source: targets_hosts
-        target: /tmp/targets.txt
       - source: ports_exclude
         target: /tmp/ports-exclude.txt
       #- source: hosts-exclude
       #  target: /tmp/hosts-exclude.txt
-    deploy:
-      resources:
-        limits:
-          cpus: '3'
-          memory: '3G'
 
-  nuclei:
-    image: projectdiscovery/nuclei:latest
-    container_name: nuclei
-    volumes:
-      - $PWD/data:/data
-    configs:
+      - source: tlsx_cfg
+        target: /root/.config/tlsx/config.yaml
+
+      - source: dnsx_cfg
+        target: /root/.config/dnsx/config.yaml
+
+      - source: subfinder_cfg
+        target: /root/.config/subfinder/config.yaml
+      - source: subfinder_provider
+        target: /root/.config/subfinder/provider-config.yaml
+
       - source: nuclei_cfg
         target: /root/.config/nuclei/config.yaml
       - source: nuclei_reporting
         target: /root/.config/nuclei/reporting-config.yaml
-      - source: resolver
-        target: /tmp/resolvers-dns.txt
-      - source: targets_services
-        target: /tmp/targets.txt
       - source: nuclei_ignored
         target: /root/.config/nuclei/.nuclei-ignore
+
     deploy:
       resources:
         limits:
           cpus: '4'
           memory: '4G'
 
+
 configs:
   targets_domain:
     file: ./config/targets-domain.txt
-  targets_hosts:
-    file: ./config/targets-hosts.txt
-  targets_services:
-    file: ./config/targets-services.txt
-
   resolver:
     file: ./config/resolvers-dns.txt
+  hosts-exclude:
+    file: ./config/hosts-exclude.txt
 
   port_list:
     file: ./config/ports-default.txt
   ports_exclude:
     file: ./config/ports-exclude.txt
-
-  hosts-exclude:
-    file: ./config/hosts-exclude.txt
 
   tlsx_cfg:
     file: ./config/tlsx-config.yaml
