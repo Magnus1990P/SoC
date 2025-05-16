@@ -1,13 +1,8 @@
 #!/usr/bin/env bash
-OSURL="$1"
-OSUSER="$2"
-OSPASSWD="$3"
 
 TF_SUBFINDER="/tmp/targets-domain.txt"
 TF_NAABU="/tmp/targets-hosts.txt"
-echo "" -n > $TF_NAABU
 OUT_SUBFINDER="/tmp/OUTPUT-subfinder.jsonl"
-rm -f "$OUT_SUBFINDER"
 
 ts=$(date +"%Y-%m-%dT%H:%M:%S%z")
 
@@ -21,7 +16,7 @@ while read -r JSON; do
 		echo "$IDENTIFIER - $TARGET - NO DETECTIONS";
 	else
 		HNAME=$(jq -r '.host' <<< "$JSON")
-		curl -u "$OSUSER:$OSPASSWD" -k -XPOST "$OSURL/scan-host/_doc/$IDENTIFIER" --json "$JSON" --silent 1>/dev/null
+		curl -u "$OPENSEARCH_USER:$OPENSEARCH_PASSWORD" -k -XPOST "$OPENSEARCH_URL/scan-host/_doc/$IDENTIFIER" --json "$JSON" --silent 1>/dev/null
 		echo "$HNAME" >> $TF_NAABU
 		echo "HOST DISCOVERED: $HNAME";
 	fi
