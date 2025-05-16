@@ -1,22 +1,17 @@
 #!/usr/bin/env bash
 
-# PARAMETERS
-OSURL="$1"
-OSUSER="$2"
-OSPASSWD="$3"
-
 ###################################################
 ##  DNSX scan
-./scanner-dns.sh "$OSURL" "$OSUSER" "$OSPASSWD" 
+./scanner-dns.sh
 ##
 ##  HOST enumeration scan
-./scanner-host_enum.sh "$OSURL" "$OSUSER" "$OSPASSWD"
+./scanner-host_enum.sh
 ##
 ##  TLSORT SCAN
-./scanner-tls.sh "$OSURL" "$OSUSER" "$OSPASSWD" 
+./scanner-tls.sh
 ###################################################
 ##  PORT SCAN
-./scanner-port.sh "$OSURL" "$OSUSER" "$OSPASSWD"
+./scanner-port.sh
 ###################################################
 ##  NUCLEI TEMPLATES
 nuclei-templates --update
