@@ -1,4 +1,4 @@
-list: "/tmp/targets.txt"
+list: "/tmp/targets-domain.txt"
 
 sources: ["alienvault", "anubis", "c99", "commoncrawl", "crtsh", "digitorus", "dnsdumpster", "hackertarget", "hudsonrock", "intelx", "rapiddns", "shodan", "sitedossier", "threatcrowd", "waybackarchive", "virustotal"]
 

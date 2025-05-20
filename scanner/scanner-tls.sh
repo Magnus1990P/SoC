@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
-OSURL="$1"
-OSUSER="$2"
-OSPASSWD="$3"
 
 OUT_TLSX="/tmp/OUTPUT-tlsx.jsonl"
-rm -f "$OUT_TLSX"
 
 tlsx
 
@@ -14,7 +10,7 @@ cat "$OUT_TLSX" | while read -r JSON; do
 		echo "$IDENTIFIER - $TARGET - NO DETECTIONS";
 	else
 		HNAME=$(jq -r '.host' <<< "$JSON")
-		curl -u "$OSUSER:$OSPASSWD" -k -XPOST "$OSURL/scan-tlsx/_doc/$IDENTIFIER" --json "$JSON" --silent 1>/dev/null
+		curl -u "$OPENSEARCH_USER:$OPENSEARCH_PASSWORD" -k -XPOST "$OPENSEARCH_URL/scan-tlsx/_doc/$IDENTIFIER" --json "$JSON" --silent 1>/dev/null
 		echo "TLS SCANNED: $HNAME";
 	fi
 done;

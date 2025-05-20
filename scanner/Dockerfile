@@ -28,5 +28,3 @@ ADD ./config/ports-exclude.txt.sample /tmp/ports-exclude.txt
 ADD ./config/resolvers-dns.txt.sample /tmp/resolvers-dns.txt
 
 ADD ./config/targets-domain.txt.sample /tmp/targets-domain.txt
-
-CMD nix-shell -p dnsx subfinder tlsx naabu nuclei nuclei-templates '<nixpkgs>' --run "./scanner-full.sh $OPENSEARCH_URL $OPENSEARCH_USER $OPENSEARCH_PASSWORD /scanning"

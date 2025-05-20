@@ -1,8 +1,7 @@
-# 
-l: "/tmp/targets-hosts.txt"
+list: "/tmp/targets-hosts.txt"
 
 # excluded hosts
-#ef: "/tmp/hosts-exclude.txt"
+ef: "/tmp/hosts-exclude.txt"
 
 # excluded ports
 #pf: "/tmp/ports-exclude.txt"
