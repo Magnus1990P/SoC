@@ -7,7 +7,6 @@ services:
       - OPENSEARCH_URL=${OPENSEARCH_URL}
       - OPENSEARCH_USER=${OPENSEARCH_USER}
       - OPENSEARCH_PASSWORD=${OPENSEARCH_PASSWORD}
-      - TARGET_FILE=${TARGET_FILE}
     volumes:
       - $PWD/data:/data
     #entrypoint: "nix-shell -p jq curl dnsx tlsx subfinder naabu nuclei nuclei-templates '<nixpkgs>' --run ./scanner-full.sh"
@@ -55,7 +54,7 @@ services:
 
 configs:
   targets_domain:
-    file: ${TARGET_FILE:-./config/targets-domain.txt}
+    file: ${TARGET_FILE:-./config/targets-domain.txt.sample}
   hosts-exclude:
     file: ${HOSTS_EXCLUDE:-./config/hosts-exclude.txt.sample}
 
