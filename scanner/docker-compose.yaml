@@ -25,6 +25,7 @@ services:
       - source: tlsx_cfg
         target: /root/.config/tlsx/config.yaml
 
+
       - source: dnsx_cfg
         target: /root/.config/dnsx/config.yaml
 
@@ -36,6 +37,7 @@ services:
       - source: subfinder_provider
         target: /root/.config/subfinder/provider-config.yaml
 
+
       - source: nuclei_cfg
         target: /root/.config/nuclei/config.yaml
       - source: nuclei_reporting
@@ -43,11 +45,13 @@ services:
       - source: nuclei_ignored
         target: /root/.config/nuclei/.nuclei-ignore
 
+
     deploy:
       resources:
         limits:
           cpus: '4'
           memory: '4G'
+
 
 configs:
   targets_domain:

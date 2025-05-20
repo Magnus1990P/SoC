@@ -19,7 +19,7 @@ echo ""
 
 ###################################################
 ##  HOST enumeration scan
-./scanner-host_enum.sh
+./scanner-host_enum.she
 
 ###################################################
 ##  TLSORT SCAN
