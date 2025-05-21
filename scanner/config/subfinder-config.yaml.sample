@@ -11,7 +11,8 @@ disable-update-check: true
 output: "/tmp/OUTPUT-subfinder.jsonl"
 json: true
 
-ip: false
+#active: true
+#ip: true
 
 rlist: "/tmp/resolvers-dns.txt"
 

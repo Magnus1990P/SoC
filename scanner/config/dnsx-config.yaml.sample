@@ -13,19 +13,13 @@ soa: true
 axfr: true
 caa: true
 
-# display dns response
-resp: false
-
-# display dns response only
-#resp-only: false
-
 # filter result by dns status code (eg. -rcode noerror,servfail,refused)
 #rcode: 
 
-# display cdn name
+# display
+resp: false
+#resp-only: false
 cdn: true
-
-# display host asn information
 asn: true
 
 threads: 400
@@ -36,16 +30,16 @@ disable-update-check: true
 output: "/tmp/OUTPUT-dnsx.jsonl"
 json: true
 
-# omit raw dns response from jsonl output
-or: true
+omit-raw: true
 
 health-check: false
 silent: false
 verbose: false
+update: false
 debug: false
 stats: false
 version: false
-retry: 3
+retry: 2
 hostsfile: false
 trace: false
 resume: false

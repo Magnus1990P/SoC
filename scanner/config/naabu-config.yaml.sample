@@ -1,24 +1,14 @@
+# File containing list of targets
 list: "/tmp/targets-hosts.txt"
-
-# excluded hosts
-ef: "/tmp/hosts-exclude.txt"
-
-# excluded ports
-#pf: "/tmp/ports-exclude.txt"
-
+exclude-file: "/tmp/hosts-exclude.txt"
+ports-file: "/tmp/portlist.txt"
 # top ports to scan [full,100,1000]
-tp: 1000
+#top-ports: 1000
+#exclude-ports: 
+exclude-cdn: true
+display-cdn: true
 
-# skip full port scans for cdn/waf (only scan for port 80,443)
-ec: true
-
-# display cdn in use
-cdn: true
-
-# thread count
 c: 500
-
-# packets per sec
 rate: 4000
 
 # disable automatic naabu update check
@@ -29,30 +19,25 @@ output: "/tmp/OUTPUT-naabu.jsonl"
 json: true
 
 # scan all the ip's associated with dns record
-sa: true
+scan-all-ips: true
 
 # type of port scan (syn/connect)
-s: c
+scan-type: c
 
 nmap: false
 resume: false
 passive: false
 
-# list of custom resolver dns resolution (comma separated or from file)
+# list of resolvers
 r: "/tmp/resolvers-dns.txt" 
 
-# skip host discovery
 skip-host-discovery: true
-
-# enable host discovery
 with-host-discovery: false
-
 #probe-icmp-echo: true
 arp-ping: false
 
 service-discovery: false
 service-version: false
-
 # number of retries for the port scan
 retries: 2
 
@@ -61,9 +46,5 @@ timeout: 2000
 
 # ping probes for verification of host
 #ping: true
-
-# validate the ports again with tcp verification
 verify: false
-
-# display only results in output
 silent: false
