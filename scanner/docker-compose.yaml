@@ -8,8 +8,8 @@ services:
       - OPENSEARCH_USER=${OPENSEARCH_USER}
       - OPENSEARCH_PASSWORD=${OPENSEARCH_PASSWORD}
     volumes:
-      - $PWD/data:/data
-    entrypoint: "nix-shell -p jq curl dnsx tlsx subfinder naabu '<nixpkgs>' --run ./scanner-full.sh"
+      - $PWD/nuclei-templates:/tmp/nuclei-templates
+    entrypoint: "./scanner-full.sh"
     configs:
       - source: targets_domain 
         target: /tmp/targets-domain.txt
@@ -44,8 +44,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '4'
-          memory: '4G'
+          cpus: '1'
+          memory: '2G'
 
 
 configs:

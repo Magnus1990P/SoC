@@ -24,5 +24,3 @@ done;
 
 cat "$TF_DOMAIN" "$TF_NAABU" | grep -v '^null:' | sort | uniq > "/tmp/.targets-hosts.txt"
 mv "/tmp/.targets-hosts.txt" "$TF_NAABU"
-echo "####  TF_NAABU"
-cat "$TF_NAABU"

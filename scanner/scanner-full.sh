@@ -30,9 +30,6 @@ echo ""
 ./scanner-port.sh
 
 ###################################################
-##  NUCLEI TEMPLATES
-#nuclei-templates --update
-
-###################################################
 ##  NUCLEI SCAN
-#nuclei
+nuclei
+

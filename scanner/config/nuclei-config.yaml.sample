@@ -5,10 +5,12 @@ scan-all-ips: true
 report-config: "/root/.config/nuclei/reporting-config.yaml"
 
 new-templates: false
-automatic-scan: true
+automatic-scan: false
 validate: false
 no-strict-syntax: false
 template-display: false
+
+leave-default-ports: false
 
 # enable loading code protocol-based templates
 #code: false
@@ -19,10 +21,10 @@ severity:
   - critical
   - high
   - medium
-#  - unknown
-#  - low
+  - unknown
+  - low
   - info
-exclude-severity:
+#exclude-severity:
 #  - info
 #  - low
 #  - unknown
@@ -32,8 +34,8 @@ type:
   - dns
   - file
   - http
-  #- javascript
-  #- network
+  - javascript
+  - network
   - ssl
 exclude-type:
   - passive
@@ -105,45 +107,38 @@ fuzz-aggression: low
 
 # strategy to use while scanning(auto/host-spray/template-spray)
 #scan-strategy: auto
-#scan-strategy: host-spray
-scan-strategy: template-spray
+scan-strategy: host-spray
+#scan-strategy: template-spray
 
 # maximum number of templates to be executed in parallel
-concurrency: 1
+concurrency: 25
 
 # maximum number of hosts to be analyzed in parallel per template
-bulk-size: 10
+bulk-size: 25
 
 # maximum number of requests to send per second
-rate-limit: 2000
-
-# maximum number of headless hosts to be analyzed in parallel per template
-#headless-bulk-size: 10
-# maximum number of headless templates to be executed in parallel
-#headless-concurrency: 10
+rate-limit: 250
 
 # maximum number of javascript runtimes to be executed in parallel
 js-concurrency: 100
 
 # max payload concurrency for each template
-payload-concurrency: 50
+payload-concurrency: 10
 
 # http probe concurrency with httpx
 probe-concurrency: 300
 
-timeout: 2
-retries: 2
-
-leave-default-ports: false
+timeout: 5
+retries: 1
 
 # disable skipping host from scan based on errors
-no-mhe: true
+no-mhe: false
 # max errors for a host before skipping from scan
-#max-host-error: 100
+max-host-error: 25
 
 # use a project folder to avoid sending same request multiple times
-project: false
-project-path: "/tmp"
+project: true
+project-path: "/tmp/project"
 
 stop-at-first-match: false
 stream: true
@@ -153,7 +148,11 @@ no-stdin: true
 #no-httpx: false
 
 headless: false
-page-timeout: 2
+# maximum number of headless hosts to be analyzed in parallel per template
+headless-bulk-size: 5
+# maximum number of headless templates to be executed in parallel
+headless-concurrency: 5
+page-timeout: 5
 show-browser: false
 #headless-options: []
 #system-chrome: false
@@ -164,6 +163,6 @@ version: false
 vv: false
 debug: false
 health-check: false
-update-templates: true
-#update-template-dir: "/tmp/nuclei-templates" 
+update-templates: false
+update-template-dir: "/tmp/nuclei-templates" 
 disable-update-check: true
