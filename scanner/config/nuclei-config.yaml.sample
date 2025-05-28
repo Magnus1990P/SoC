@@ -60,7 +60,7 @@ max-redirects: 3
 disable-redirects: false
 
 # custom header/cookie to include in all http request in header:value format (cli, file)
-header: ["KITSEC:SCANNING-FOR-VULNERABILITIES-CONTACT-FOR-INFORMATION"]
+header: ["SECURITYSCAN:SCANNING-FOR-VULNERABILITIES-CONTACT-FOR-INFORMATION"]
 
 # file containing resolver list for nuclei
 resolvers: "/tmp/resolvers-dns.txt"
