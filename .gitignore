@@ -1,4 +1,5 @@
 !scanner/config/*.sample
 scanner/config/*
 scanner/data/OUTPUT-*
+scanner/data/targets-*
 .env
