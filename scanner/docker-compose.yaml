@@ -2,7 +2,6 @@ services:
   scanner:
     image: scanner:latest
     container_name: scanner
-    user: root
     build: .
     environment:
       - OPENSEARCH_URL=${OPENSEARCH_URL}
