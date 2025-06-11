@@ -2,13 +2,12 @@ services:
   scanner:
     image: scanner:latest
     container_name: scanner
+    user: root
     build: .
     environment:
       - OPENSEARCH_URL=${OPENSEARCH_URL}
       - OPENSEARCH_USER=${OPENSEARCH_USER}
       - OPENSEARCH_PASSWORD=${OPENSEARCH_PASSWORD}
-    #volumes:
-    #  - $PWD/../../nuclei-templates:/tmp/nuclei-templates:ro
     entrypoint: "./scanner-full.sh"
     configs:
       - source: targets_domain 

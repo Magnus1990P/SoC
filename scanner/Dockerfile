@@ -9,6 +9,8 @@ RUN nix-env --install jq curl gawk git
 RUN nix-env --install ruby perl python3 go
 RUN nix-env --install dnsx tlsx subfinder naabu nuclei
 
+USER 1000:100
+
 RUN git clone "https://github.com/projectdiscovery/nuclei-templates.git" "/tmp/nuclei-templates"
 
 ADD ./*.sh ./
