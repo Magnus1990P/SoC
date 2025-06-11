@@ -1,4 +1,4 @@
-list: "/tmp/targets-services.txt" 
+list: "/tmp/targets-hosts.txt" 
 resume: false
 scan-all-ips: true
 
@@ -14,7 +14,7 @@ leave-default-ports: false
 
 # enable loading code protocol-based templates
 #code: false
-disable-unsigned-templates: false
+disable-unsigned-templates: true
 
 # templates to run based on severity. possible values: info, low, medium, high, critical, unknown
 severity:
@@ -36,15 +36,16 @@ type:
   - http
   - javascript
   - network
-  - ssl
 exclude-type:
+  - ssl
   - passive
   - code
   - dast
   - headless
   - workflows
-#exclude-templates:
-#  - http/technologies/tech-detect
+exclude-templates:
+  - http/technologies/tech-detect
+  - http/fuzzing/waf-fuzz.yaml
 
 # output file to write found issues/vulnerabilities
 output: "/tmp/OUTPUT-nuclei.jsonl"
@@ -60,7 +61,7 @@ max-redirects: 3
 disable-redirects: false
 
 # custom header/cookie to include in all http request in header:value format (cli, file)
-header: ["SECURITYSCAN:SCANNING-FOR-VULNERABILITIES-CONTACT-FOR-INFORMATION"]
+header: ["SECURITY_DEPARTMENT:SCANNING-FOR-VULNERABILITIES-CONTACT-FOR-INFORMATION"]
 
 # file containing resolver list for nuclei
 resolvers: "/tmp/resolvers-dns.txt"
@@ -111,25 +112,25 @@ scan-strategy: host-spray
 #scan-strategy: template-spray
 
 # maximum number of templates to be executed in parallel
-concurrency: 25
+concurrency: 20
 
 # maximum number of hosts to be analyzed in parallel per template
-bulk-size: 25
+bulk-size: 15
 
 # maximum number of requests to send per second
 rate-limit: 250
 
 # maximum number of javascript runtimes to be executed in parallel
-js-concurrency: 100
+js-concurrency: 60
 
 # max payload concurrency for each template
 payload-concurrency: 10
 
 # http probe concurrency with httpx
-probe-concurrency: 300
+probe-concurrency: 750
 
-timeout: 5
-retries: 1
+timeout: 3
+retries: 2
 
 # disable skipping host from scan based on errors
 no-mhe: false
@@ -138,7 +139,7 @@ max-host-error: 25
 
 # use a project folder to avoid sending same request multiple times
 project: true
-project-path: "/tmp/project"
+project-path: "/tmp/project/"
 
 stop-at-first-match: false
 stream: true
@@ -164,5 +165,5 @@ vv: false
 debug: false
 health-check: false
 update-templates: false
-update-template-dir: "/tmp/nuclei-templates" 
+update-template-dir: "/tmp/nuclei-templates/" 
 disable-update-check: true

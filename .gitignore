@@ -2,4 +2,5 @@
 scanner/config/*
 scanner/data/OUTPUT-*
 scanner/data/targets-*
+!scanner/data/targets-test.txt
 .env

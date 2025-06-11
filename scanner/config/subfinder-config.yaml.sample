@@ -5,22 +5,21 @@ sources: ["alienvault", "anubis", "c99", "commoncrawl", "crtsh", "digitorus", "d
 recursive: true
 all: false
 
-rate-limit: 3000
-t: 500
+rate-limit: 1000
+t: 200
 disable-update-check: true
 output: "/tmp/OUTPUT-subfinder.jsonl"
 json: true
 
-#active: true
-#ip: true
+active: true
+ip: true
 
 rlist: "/tmp/resolvers-dns.txt"
 
-active: true
 silent: false
 
 version: false
 v: false
-timeout: 2
+timeout: 5
 
 collect-sources: true
