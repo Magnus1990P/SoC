@@ -11,33 +11,6 @@ services:
     configs:
       - source: targets_domain 
         target: /tmp/targets-domain.txt
-      - source: resolver
-        target: /tmp/resolvers-dns.txt
-      - source: ports_file
-        target: /tmp/portlist.txt
-      - source: hosts-exclude
-        target: /tmp/hosts-exclude.txt
-
-      - source: tlsx_cfg
-        target: /root/.config/tlsx/config.yaml
-
-      - source: dnsx_cfg
-        target: /root/.config/dnsx/config.yaml
-
-      - source: naabu_cfg
-        target: /root/.config/naabu/config.yaml
-
-      - source: subfinder_cfg
-        target: /root/.config/subfinder/config.yaml
-      - source: subfinder_provider
-        target: /root/.config/subfinder/provider-config.yaml
-
-      - source: nuclei_cfg
-        target: /root/.config/nuclei/config.yaml
-      - source: nuclei_reporting
-        target: /root/.config/nuclei/reporting-config.yaml
-      - source: nuclei_ignored
-        target: /root/.config/nuclei/ignored-templates.txt
 
     deploy:
       resources:
@@ -45,37 +18,8 @@ services:
           cpus: '1.5'
           memory: '2.5G'
 
-
+          
 configs:
   targets_domain:
     file: ${TARGET_FILE}
-  hosts-exclude:
-    file: ${HOSTS_EXCLUDE:-./config-default/hosts-exclude.txt}
-
-  resolver:
-    file: ${RESOLVERS_DNS:-./config-default/resolvers-dns.txt}
-
-  ports_file:
-    file: ${PORTS_FILE:-./config-default/ports-default.txt}
-
-  tlsx_cfg:
-    file: ${TLSX_CONFIG:-./config-default/tlsx/config.yaml}
-
-  dnsx_cfg:
-    file: ${DNSX_CONFIG:-./config-default/dnsx/config.yaml}
-
-  naabu_cfg:
-    file: ${NAABU_CONFIG:-./config-default/naabu/config.yaml}
-
-  nuclei_cfg:
-    file: ${NUCLEI_CONFIG:-./config-default/nuclei/config.yaml}
-  nuclei_reporting:
-    file: ${NUCLEI_REPORT:-./config-default/nuclei/reporting.yaml}
-  nuclei_ignored:
-    file: ${NUCLEI_IGNORE:-./config-default/nuclei/ignored-templates.txt}
-
-  subfinder_cfg:
-    file: ${SUBFINDER_CONFIG:-./config-default/subfinder/config.yaml}
-  subfinder_provider:
-    file: ${SUBFINDER_PROVIDER:-./config-default/subfinder/provider.yaml}
 
