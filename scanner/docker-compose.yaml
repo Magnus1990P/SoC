@@ -37,7 +37,7 @@ services:
       - source: nuclei_reporting
         target: /root/.config/nuclei/reporting-config.yaml
       - source: nuclei_ignored
-        target: /root/.config/nuclei/.nuclei-ignore
+        target: /root/.config/nuclei/ignored-templates.txt
 
     deploy:
       resources:
@@ -48,33 +48,34 @@ services:
 
 configs:
   targets_domain:
-    file: ${TARGET_FILE:-./config/targets-domain.txt.sample}
+    file: ${TARGET_FILE}
   hosts-exclude:
-    file: ${HOSTS_EXCLUDE:-./config/hosts-exclude.txt.sample}
+    file: ${HOSTS_EXCLUDE:-./config-default/hosts-exclude.txt}
 
   resolver:
-    file: ${RESOLVERS_DNS:-./config/resolvers-dns.txt.sample}
+    file: ${RESOLVERS_DNS:-./config-default/resolvers-dns.txt}
 
   ports_file:
-    file: ${PORTS_FILE:-./config/ports-default.txt.sample}
+    file: ${PORTS_FILE:-./config-default/ports-default.txt}
 
   tlsx_cfg:
-    file: ${TLSX_CONFIG:-./config/tlsx-config.yaml.sample}
+    file: ${TLSX_CONFIG:-./config-default/tlsx/config.yaml}
 
   dnsx_cfg:
-    file: ${DNSX_CONFIG:-./config/dnsx-config.yaml.sample}
+    file: ${DNSX_CONFIG:-./config-default/dnsx/config.yaml}
 
   naabu_cfg:
-    file: ${NAABU_CONFIG:-./config/naabu-config.yaml.sample}
+    file: ${NAABU_CONFIG:-./config-default/naabu/config.yaml}
 
   nuclei_cfg:
-    file: ${NUCLEI_CONFIG:-./config/nuclei-config.yaml.sample}
+    file: ${NUCLEI_CONFIG:-./config-default/nuclei/config.yaml}
   nuclei_reporting:
-    file: ${NUCLEI_REPORT:-./config/nuclei-reporting.yaml.sample}
+    file: ${NUCLEI_REPORT:-./config-default/nuclei/reporting.yaml}
   nuclei_ignored:
-    file: ${NUCLEI_IGNORE:-./config/nuclei-ignored-templates.txt.sample}
+    file: ${NUCLEI_IGNORE:-./config-default/nuclei/ignored-templates.txt}
 
   subfinder_cfg:
-    file: ${SUBFINDER_CONFIG:-./config/subfinder-config.yaml.sample}
+    file: ${SUBFINDER_CONFIG:-./config-default/subfinder/config.yaml}
   subfinder_provider:
-    file: ${SUBFINDER_PROVIDER:-./config/subfinder-provider.yaml.sample}
+    file: ${SUBFINDER_PROVIDER:-./config-default/subfinder/provider.yaml}
+
