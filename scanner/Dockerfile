@@ -19,4 +19,4 @@ ADD ./config/tmp/ /tmp/
 
 ADD ./scripts ./
 
-ENTRYPOINT ["./scanner-full.sh"]
+#ENTRYPOINT ["./scanner-full.sh"]

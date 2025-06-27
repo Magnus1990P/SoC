@@ -7,7 +7,7 @@ services:
       - OPENSEARCH_URL=${OPENSEARCH_URL}
       - OPENSEARCH_USER=${OPENSEARCH_USER}
       - OPENSEARCH_PASSWORD=${OPENSEARCH_PASSWORD}
-    entrypoint: "./scanner-full.sh"
+    #entrypoint: "./scanner-full.sh"
     configs:
       - source: targets_domain 
         target: /tmp/targets-domain.txt
