@@ -19,6 +19,4 @@ ADD ./config/tmp/ /tmp/
 
 ADD ./scripts ./
 
-RUN git clone "https://github.com/projectdiscovery/nuclei-templates.git" "/tmp/nuclei-templates"
-
 ENTRYPOINT ["./scanner-full.sh"]

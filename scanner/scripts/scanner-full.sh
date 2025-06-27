@@ -24,7 +24,7 @@ echo ""
 
 ###################################################
 ##  DNSX scan
-./scanner-dns.sh
+#./scanner-dns.sh
 
 ###################################################
 ##  HOST enumeration scan
@@ -32,12 +32,17 @@ echo ""
 
 ###################################################
 ##  TLSORT SCAN
-./scanner-tls.sh
+#./scanner-tls.sh
 
 ###################################################
 ##  PORT SCAN
-./scanner-port.sh
+#./scanner-port.sh
 
 ###################################################
 ##  NUCLEI SCAN
+echo "######"
+git clone https://github.com/projectdiscovery/nuclei-templates.git /tmp/nuclei-templates
+echo "######"
+ls /tmp/nuclei-templates
+echo "######"
 nuclei
