@@ -3,4 +3,5 @@
 !scanner/data/targets-test.txt
 scanner/config/*
 scanner/data/
+excluded-targets.txt
 .env
