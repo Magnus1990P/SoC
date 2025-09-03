@@ -22,11 +22,11 @@ severity:
   - high
   - medium
   - unknown
-  - low
-  - info
-#exclude-severity:
-#  - info
 #  - low
+#  - info
+exclude-severity:
+  - info
+  - low
 #  - unknown
 
 type:
@@ -46,6 +46,8 @@ exclude-type:
 exclude-templates:
   - http/technologies/tech-detect
   - http/fuzzing/waf-fuzz.yaml
+exclude-hosts:
+  - /tmp/hosts-exclude.txt
 
 # output file to write found issues/vulnerabilities
 output: "/tmp/OUTPUT-nuclei.jsonl"
@@ -58,7 +60,7 @@ omit-raw: false
 follow-redirects: false
 follow-host-redirects: false
 max-redirects: 3
-disable-redirects: false
+disable-redirects: true
 
 # custom header/cookie to include in all http request in header:value format (cli, file)
 header: ["SECURITY_DEPARTMENT:SCANNING-FOR-VULNERABILITIES-CONTACT-FOR-INFORMATION"]
@@ -115,27 +117,27 @@ scan-strategy: host-spray
 concurrency: 20
 
 # maximum number of hosts to be analyzed in parallel per template
-bulk-size: 15
+bulk-size: 2
 
 # maximum number of requests to send per second
 rate-limit: 250
 
 # maximum number of javascript runtimes to be executed in parallel
-js-concurrency: 60
+js-concurrency: 50
 
 # max payload concurrency for each template
-payload-concurrency: 10
+payload-concurrency: 15
 
 # http probe concurrency with httpx
 probe-concurrency: 750
 
-timeout: 3
+timeout: 2
 retries: 2
 
 # disable skipping host from scan based on errors
 no-mhe: false
 # max errors for a host before skipping from scan
-max-host-error: 25
+max-host-error: 150
 
 # use a project folder to avoid sending same request multiple times
 project: true
@@ -153,7 +155,7 @@ headless: false
 headless-bulk-size: 5
 # maximum number of headless templates to be executed in parallel
 headless-concurrency: 5
-page-timeout: 5
+page-timeout: 3
 show-browser: false
 #headless-options: []
 #system-chrome: false

@@ -11,15 +11,18 @@ services:
     configs:
       - source: targets_domain 
         target: /tmp/targets-domain.txt
+      - source: targets_excluded 
+        target: /tmp/hosts-excluded.txt
 
     deploy:
       resources:
         limits:
-          cpus: '1.5'
+          cpus: '2.5'
           memory: '2.5G'
 
-          
 configs:
   targets_domain:
     file: ${TARGET_FILE}
+  targets_excluded:
+    file: ${EXCLUDED_HOSTS}
 
