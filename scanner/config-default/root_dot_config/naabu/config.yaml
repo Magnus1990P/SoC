@@ -1,6 +1,6 @@
 # File containing list of targets
 list: "/tmp/targets-ips.txt"
-exclude-file: "/tmp/hosts-exclude.txt"
+exclude-file: "/tmp/excluded-ips.txt"
 ports-file: "/tmp/portlist.txt"
 # top ports to scan [full,100,1000]
 #top-ports: 1000

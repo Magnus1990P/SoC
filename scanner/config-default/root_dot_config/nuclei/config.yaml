@@ -1,6 +1,7 @@
 list: "/tmp/targets-hosts.txt" 
 resume: false
 scan-all-ips: true
+exclude-hosts: "/tmp/excluded-hosts.txt"
 
 report-config: "/root/.config/nuclei/reporting-config.yaml"
 
@@ -46,8 +47,6 @@ exclude-type:
 exclude-templates:
   - http/technologies/tech-detect
   - http/fuzzing/waf-fuzz.yaml
-exclude-hosts:
-  - /tmp/hosts-exclude.txt
 
 # output file to write found issues/vulnerabilities
 output: "/tmp/OUTPUT-nuclei.jsonl"
@@ -169,3 +168,6 @@ health-check: false
 update-templates: false
 update-template-dir: "/tmp/nuclei-templates/" 
 disable-update-check: true
+
+headers:
+  - X-VulnerabilityScan: Scanning a host near you.  Report to your security team

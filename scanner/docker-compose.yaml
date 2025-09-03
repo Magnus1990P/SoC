@@ -12,7 +12,7 @@ services:
       - source: targets_domain 
         target: /tmp/targets-domain.txt
       - source: targets_excluded 
-        target: /tmp/hosts-excluded.txt
+        target: /tmp/excluded-hosts.txt
 
     deploy:
       resources:
