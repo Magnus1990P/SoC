@@ -28,7 +28,24 @@ time ./scanner-host_enum.sh
 
 ###################################################
 ##  NUCLEI SCAN
+echo ""
+echo ""
+echo ""
 echo "######"
 git clone https://github.com/projectdiscovery/nuclei-templates.git /tmp/nuclei-templates
 echo "######"
+echo ""
+echo ""
+echo ""
+echo "DISCOVERED HOSTS"
+echo "--------------"
+cat /tmp/targets-hosts.txt
+echo "%%%%%%%%%%%"
+echo "EXCLUDED HOSTS"
+echo "--------------"
+cat /tmp/excluded-hosts.txt
+echo ""
+echo ""
+echo ""
+
 time nuclei

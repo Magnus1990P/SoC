@@ -21,14 +21,14 @@ while read -r JSON; do
 		IP=$(jq -r '.ip' <<< "$JSON")
 		curl -u "$OPENSEARCH_USER:$OPENSEARCH_PASSWORD" -k -XPOST "$OPENSEARCH_URL/scan-host/_doc/$IDENTIFIER" --json "$JSON" --silent 1>/dev/null
 		echo "$IP" >> "$TF_IPS"
-		echo "$IP" >> "$TF_HOSTS"
+		#echo "$IP" >> "$TF_HOSTS"
 		echo "$HNAME" >> "$TF_HOSTS"
 		echo "HOST DISCOVERED: $HNAME @ $IP";
 	fi
 done;
 
 # Generate list of IPS for faster portscan
-cat "$TF_DOMAIN" >> "$TF_IPS"
+#cat "$TF_DOMAIN" >> "$TF_IPS"
 cat "$TF_IPS" | sort | grep -v '^null' | uniq > "/tmp/.targets-ips.txt"
 mv "/tmp/.targets-ips.txt" "$TF_IPS"
 
