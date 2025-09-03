@@ -19,5 +19,3 @@ while read -r JSON; do
 	fi
 done;
 
-#cat "$TF_NUCLEI" | grep -v '^null:' | sort | uniq > "/tmp/.targets-services.txt"
-#mv "/tmp/.targets-services.txt" "$TF_NUCLEI"

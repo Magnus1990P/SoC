@@ -21,8 +21,8 @@ echo "--------------"
 echo ""
 echo ""
 
-cp /tmp/targets-domain.txt "/tmp/.targets-hosts.txt"
-cp /tmp/targets-domain.txt "/tmp/.targets-ips.txt"
+cp /tmp/targets-domain.txt "/tmp/targets-hosts.txt"
+cp /tmp/targets-domain.txt "/tmp/targets-ips.txt"
 
 ###################################################
 ##  TLSORT SCAN

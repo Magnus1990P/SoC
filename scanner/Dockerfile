@@ -7,7 +7,7 @@ WORKDIR /scanning
 ENV TARGET_FILE="/tmp/targets-domain.txt"
 
 RUN nix-channel --update
-RUN nix-env --install jq curl gawk git
+RUN nix-env --install jq curl gawk git-minimal
 RUN nix-env --install ruby perl python3 go
 RUN nix-env --install dnsx tlsx subfinder naabu nuclei
 
