@@ -3,5 +3,7 @@
 !scanner/data/targets-test.txt
 scanner/config/*
 scanner/data/
-excluded-targets.txt
+scanner/excluded-hosts.txt
+scanner/target-test.txt
+scanner/excluded-ips.txt
 .env
