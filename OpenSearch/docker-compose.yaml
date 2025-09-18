@@ -3,39 +3,34 @@ services:
     image: opensearchproject/opensearch:latest
     container_name: opensearch
     environment:
-      cluster.name: soc-cluster
-      node.name: opensearch
       discovery.type: single-node
-      bootstrap.memory_lock: true
+      node.name: opensearch
       OPENSEARCH_JAVA_OPTS: -Xms512m -Xmx512m
-      action.auto_create_index: false
       OPENSEARCH_INITIAL_ADMIN_PASSWORD: ${OS_ADMIN_PASSWORD}
+    ports:
+      - 9200:9200
     volumes:
       - opensearch-data:/usr/share/opensearch/data
-    ports:
-      - 0.0.0.0:9200:9200
-    networks:
-      - public-net
     ulimits:
       memlock:
         soft: -1
         hard: -1
       nofile:
-        soft: 65536 # maximum number of open files for the OpenSearch user, set to at least 65536 on modern systems
+        soft: 65536
         hard: 65536
     healthcheck:
-      test: "curl -kf https://admin:${OS_ADMIN_PASSWORD}@localhost:9200"
+      test: "curl -kf http://admin:${OS_ADMIN_PASSWORD}@localhost:9200"
     restart: unless-stopped
 
   opensearch-dashboards:
     image: opensearchproject/opensearch-dashboards:latest
-    container_name: opensearch-dashboards
-    ports:
-      - 0.0.0.0:5601:5601
+    container_name: opensearch-dashboard
     environment:
-      - 'OPENSEARCH_HOSTS=["https://opensearch:9200"]'
-    networks:
-      - public-net
+      OPENSEARCH_HOSTS: '["https://opensearch:9200"]'
+    ports:
+      - 5601:5601
+    expose:
+      - "5601"
     depends_on:
       - opensearch
     healthcheck:
@@ -44,6 +39,4 @@ services:
 
 volumes:
   opensearch-data:
-
-networks:
-  public-net:
+    external: false

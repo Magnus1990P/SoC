@@ -34,7 +34,7 @@ omit-raw: true
 
 health-check: false
 silent: false
-verbose: false
+verbose: true
 update: false
 debug: false
 stats: false

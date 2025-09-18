@@ -17,9 +17,8 @@ ip: true
 rlist: "/tmp/resolvers-dns.txt"
 
 silent: false
-
 version: false
-v: false
+verbose: true
 timeout: 5
 
 collect-sources: true

@@ -7,22 +7,18 @@ services:
       - OPENSEARCH_URL=${OPENSEARCH_URL}
       - OPENSEARCH_USER=${OPENSEARCH_USER}
       - OPENSEARCH_PASSWORD=${OPENSEARCH_PASSWORD}
-    #entrypoint: "./scanner-full.sh"
     configs:
       - source: targets_domain 
         target: /tmp/targets-domain.txt
       - source: targets_excluded 
         target: /tmp/excluded-hosts.txt
-
     deploy:
       resources:
         limits:
           cpus: '2.5'
           memory: '2.5G'
-
 configs:
   targets_domain:
     file: ${TARGET_FILE}
   targets_excluded:
     file: ${EXCLUDED_HOSTS}
-

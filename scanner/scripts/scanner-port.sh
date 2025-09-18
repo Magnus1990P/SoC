@@ -14,6 +14,7 @@ while read -r JSON; do
 		HNAME=$(jq -r '.host' <<< "$JSON")
 		IP=$(jq -r '.ip' <<< "$JSON")
 		PORT=$(jq -r '.port' <<< "$JSON")
+		curl -u "$OPENSEARCH_USER:$OPENSEARCH_PASSWORD" -k -XPOST "$OPENSEARCH_URL/scan-port/_doc/$IDENTIFIER" --json "$JSON" 
 		curl -u "$OPENSEARCH_USER:$OPENSEARCH_PASSWORD" -k -XPOST "$OPENSEARCH_URL/scan-port/_doc/$IDENTIFIER" --json "$JSON" --silent 1>/dev/null
 		echo "PORT DISCOVERED: $HNAME - $IP - $PORT";
 	fi

@@ -106,6 +106,6 @@ dns: true
 resp-only: false
 silent: false
 no-color: false
-verbose: false
+verbose: true
 version: false
 hc: false
