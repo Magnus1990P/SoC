@@ -19,14 +19,13 @@ echo "--------------"
 cat /tmp/targets-domain.txt
 echo "--------------"
 echo ""
-echo ""
 
 cp /tmp/targets-domain.txt "/tmp/targets-hosts.txt"
 cp /tmp/targets-domain.txt "/tmp/targets-ips.txt"
 
 ###################################################
 ##  TLSORT SCAN
-#./scanner-tls.sh
+./scanner-tls.sh
 
 ###################################################
 ##  PORT SCAN
@@ -34,8 +33,17 @@ cp /tmp/targets-domain.txt "/tmp/targets-ips.txt"
 
 ###################################################
 ##  NUCLEI SCAN
-
-#echo "######"
-#git clone https://github.com/projectdiscovery/nuclei-templates.git /tmp/nuclei-templates
-#echo "######"
-#time nuclei
+echo ""
+echo "%%%%%%%%%%%%%%%%%%%%%%"
+git clone https://github.com/projectdiscovery/nuclei-templates.git /tmp/nuclei-templates
+echo "%%%%%%%%%%%%%%%%%%%%%%"
+echo "DISCOVERED HOSTS"
+echo "%%%%%%%%%%%%%%%%%%%%%%"
+cat /tmp/targets-hosts.txt
+echo "%%%%%%%%%%%%%%%%%%%%%%"
+echo "EXCLUDED HOSTS"
+echo "%%%%%%%%%%%%%%%%%%%%%%"
+cat /tmp/excluded-hosts.txt
+echo "%%%%%%%%%%%%%%%%%%%%%%"
+echo ""
+nuclei

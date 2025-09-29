@@ -29,3 +29,10 @@ Run said image with path to domain target list:
 * `docker compose up -d`
     - With the environment variable specified in the .env
     - Omittance of enviroment variables will load the sample files.
+
+
+## Cron job
+Set up crontab as follows after configuring parameters and building the Docker image
+```
+45 00,06,16 * * *   localadmin    bash ~/SoC/scanner/cron_task.sh >> /tmp/scan.log
+```
