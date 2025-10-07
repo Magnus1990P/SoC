@@ -34,5 +34,6 @@ Run said image with path to domain target list:
 ## Cron job
 Set up crontab as follows after configuring parameters and building the Docker image
 ```
-45 00,06,16 * * *   localadmin    bash ~/SoC/scanner/cron_task.sh >> /tmp/scan.log
+45 06,12,18 * * *   localadmin    bash ~/SoC/scanner/cron_task-daily.sh >> /tmp/scan-daily.log
+00 05 * * 3   localadmin    bash ~/SoC/scanner/cron_task-weekly.sh >> /tmp/scan-weekly.log
 ```

@@ -7,6 +7,8 @@ services:
       node.name: opensearch
       OPENSEARCH_JAVA_OPTS: -Xms512m -Xmx512m
       OPENSEARCH_INITIAL_ADMIN_PASSWORD: ${OS_ADMIN_PASSWORD}
+    networks:
+      - SOCnet
     ports:
       - 9200:9200
     volumes:
@@ -27,6 +29,8 @@ services:
     container_name: opensearch-dashboard
     environment:
       OPENSEARCH_HOSTS: '["https://opensearch:9200"]'
+    networks:
+      - SOCnet
     ports:
       - 5601:5601
     expose:
@@ -40,3 +44,7 @@ services:
 volumes:
   opensearch-data:
     external: false
+
+networks:
+  SOCnet:
+    external: true

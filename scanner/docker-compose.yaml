@@ -7,6 +7,8 @@ services:
       - OPENSEARCH_URL=${OPENSEARCH_URL}
       - OPENSEARCH_USER=${OPENSEARCH_USER}
       - OPENSEARCH_PASSWORD=${OPENSEARCH_PASSWORD}
+    networks:
+      - SOCnet
     configs:
       - source: targets_domain 
         target: /tmp/targets-domain.txt
@@ -22,3 +24,7 @@ configs:
     file: ${TARGET_FILE}
   targets_excluded:
     file: ${EXCLUDED_HOSTS}
+
+networks:
+  SOCnet:
+    external: true
