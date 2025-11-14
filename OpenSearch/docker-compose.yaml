@@ -13,6 +13,9 @@ services:
       - 9200:9200
     volumes:
       - opensearch-data:/usr/share/opensearch/data
+      - ./install-plugins.sh:/usr/share/opensearch/install-plugins.sh
+    command: >
+      bash -c "/usr/share/opensearch/install-plugins.sh && ./opensearch-docker-entrypoint.sh"
     ulimits:
       memlock:
         soft: -1  
@@ -35,6 +38,8 @@ services:
       - 5601:5601
     expose:
       - "5601"
+    volumes:
+      - dashboard-data:/usr/share/opensearch-dashboards/data
     depends_on:
       - opensearch
     healthcheck:
@@ -43,6 +48,8 @@ services:
 
 volumes:
   opensearch-data:
+    external: false
+  dashboard-data:
     external: false
 
 networks:
