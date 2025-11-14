@@ -26,6 +26,9 @@ echo ""
 ##  HOST enumeration scan
 ./scanner-host_enum.sh
 
+## PORT SCAN
+./scanner-port.sh
+
 ###################################################
 ##  NUCLEI SCAN
 echo ""

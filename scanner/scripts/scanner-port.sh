@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-TF_NUCLEI="/tmp/targets-services.txt"
+TF_NUCLEI="/tmp/targets-nuclei.txt"
 OUT_NAABU="/tmp/OUTPUT-naabu.jsonl"
 
 naabu
@@ -16,6 +16,10 @@ while read -r JSON; do
 		PORT=$(jq -r '.port' <<< "$JSON")
 		curl -u "$OPENSEARCH_USER:$OPENSEARCH_PASSWORD" -k -XPOST "$OPENSEARCH_URL/scan-port/_doc/$IDENTIFIER" --json "$JSON" --silent 1>/dev/null
 		echo "PORT DISCOVERED: $HNAME - $IP - $PORT";
+		echo "$IP:$PORT" >> $TF_NUCLEI
+		echo "$HNAME:$PORT" >> $TF_NUCLEI
 	fi
 done;
 
+cat "$TF_NUCLEI" | grep -v "^null" | sort | uniq >> "$TF_NUCLEI.tmp"
+mv "$TF_NUCLEI.tmp" "$TF_NUCLEI"
