@@ -11,3 +11,9 @@ updates:
       - "/OpenSearch/"
     schedule:
       interval: "weekly"
+  - package-ecosystem: "docker-compose" # See documentation for possible values
+    directories:
+      - "/scanner/"
+      - "/OpenSearch/"
+    schedule:
+      interval: "weekly"
