@@ -5,10 +5,9 @@ PLUGINS=(
   "opensearch-knn"
   "opensearch-anomaly-detection"
   "opensearch-alerting"
-  "analysis-phonetic"
-  "analysis-icu"
-  "mapper-murmur3"
-  "opensearch-geospatial"
+  "opensearch-job-scheduler"
+  "opensearch-notifications"
+  "opensearch-reports-scheduler"
 )
 
 for plugin in "${PLUGINS[@]}"; do

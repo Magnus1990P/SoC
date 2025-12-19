@@ -1,55 +1,25 @@
 #!/usr/bin/env bash
 
-echo ""
-echo ""
-echo ""
-echo "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄"
-echo "███████████████████████████████████████████████████████████████████████████████████"
-echo "████░▄▄▄░██░▄▄▄░█▄░▄██░▀██░█▄▄░▄▄████░▄▄▄░██░▄▄▀█░▄▄▀██░▀██░██░▀██░██░▄▄▄██░▄▄▀████"
-echo "████░███░██▄▄▄▀▀██░███░█░█░███░██████▄▄▄▀▀█░█████░▀▀░██░█░█░██░█░█░██░▄▄▄██░▀▀▄████"
-echo "████░▀▀▀░██░▀▀▀░█▀░▀██░██▄░███░██████░▀▀▀░██░▀▀▄█░██░██░██▄░██░██▄░██░▀▀▀██░██░████"
-echo "███████████████████████████████████████████████████████████████████████████████████"
-echo "▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀"
-echo ""
-echo ""
-
-
-echo "TARGET LIST"
-echo "--------------"
-cat /tmp/targets-domain.txt
-echo "--------------"
-echo ""
+cat banner.txt
 
 
 ###################################################
 ##  DNSX scan
-time ./scanner-dns.sh
+./part-scanner-dns.sh
 
 ###################################################
 ##  HOST enumeration scan
-time ./scanner-host_enum.sh
+./part-scanner-host_enum.sh
 
 ###################################################
-##  TLSORT SCAN
-time ./scanner-tls.sh
+##  TLS SCAN
+./part-scanner-tls.sh
 
 ###################################################
 ##  PORT SCAN
-time ./scanner-port.sh
+./part-scanner-port.sh
 
 ###################################################
 ##  NUCLEI SCAN
-echo ""
-echo "%%%%%%%%%%%%%%%%%%%%%%"
-git clone https://github.com/projectdiscovery/nuclei-templates.git /tmp/nuclei-templates
-echo "%%%%%%%%%%%%%%%%%%%%%%"
-echo "DISCOVERED HOSTS"
-echo "%%%%%%%%%%%%%%%%%%%%%%"
-cat /tmp/targets-hosts.txt
-echo "%%%%%%%%%%%%%%%%%%%%%%"
-echo "EXCLUDED HOSTS"
-echo "%%%%%%%%%%%%%%%%%%%%%%"
-cat /tmp/excluded-hosts.txt
-echo "%%%%%%%%%%%%%%%%%%%%%%"
-echo ""
-nuclei
+./part-scanner-vuln.sh
+

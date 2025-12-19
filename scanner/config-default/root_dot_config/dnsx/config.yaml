@@ -22,8 +22,8 @@ resp: false
 cdn: true
 asn: true
 
-threads: 150
-rate-limit: 1000
+threads: 200
+rate-limit: 1500
 
 disable-update-check: true
 
@@ -34,12 +34,12 @@ omit-raw: true
 
 health-check: false
 silent: false
-verbose: true
+verbose: false
 update: false
 debug: false
 stats: false
 version: false
-retry: 3
+retry: 2
 hostsfile: false
 trace: false
 resume: false

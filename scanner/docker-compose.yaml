@@ -1,3 +1,9 @@
+# Scanner service
+
+networks:
+  SOCnet:
+    external: true
+
 services:
   scanner:
     image: scanner:latest
@@ -24,7 +30,3 @@ configs:
     file: ${TARGET_FILE}
   targets_excluded:
     file: ${EXCLUDED_HOSTS}
-
-networks:
-  SOCnet:
-    external: true

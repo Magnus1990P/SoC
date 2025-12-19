@@ -1,3 +1,17 @@
+## OpenSearch config
+
+volumes:
+  opensearch-data:
+    external: false
+  dashboard-data:
+    external: false
+
+
+networks:
+  SOCnet:
+    external: true
+
+
 services:
   opensearch:
     image: opensearchproject/opensearch:latest
@@ -5,7 +19,7 @@ services:
     environment:
       discovery.type: single-node
       node.name: opensearch
-      OPENSEARCH_JAVA_OPTS: -Xms512m -Xmx512m
+      OPENSEARCH_JAVA_OPTS: -Xms512m -Xmx2048m
       OPENSEARCH_INITIAL_ADMIN_PASSWORD: ${OS_ADMIN_PASSWORD}
     networks:
       - SOCnet
@@ -24,8 +38,21 @@ services:
         soft: 65536
         hard: 65536
     healthcheck:
-      test: "curl -kf http://admin:${OS_ADMIN_PASSWORD}@localhost:9200"
+      test:
+        [
+          "CMD-SHELL",
+          "wget --no-check-certificate -O /dev/null -q https://admin:${OS_ADMIN_PASSWORD}@localhost:9200 || exit 1"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "4"
+          memory: 9G
 
   opensearch-dashboards:
     image: opensearchproject/opensearch-dashboards:latest
@@ -41,17 +68,21 @@ services:
     volumes:
       - dashboard-data:/usr/share/opensearch-dashboards/data
     depends_on:
-      - opensearch
+      - opensearch:
+        condition: service_healthy
     healthcheck:
-      test: "curl -kf http://localhost:5601"
+      test:
+        [
+          "CMD-SHELL",
+          "wget -O /dev/null -q http://localhost:5601 || exit 1"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
     restart: unless-stopped
-
-volumes:
-  opensearch-data:
-    external: false
-  dashboard-data:
-    external: false
-
-networks:
-  SOCnet:
-    external: true
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 2048M

@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+OSIndex=scan-dnsx
+OSIndex=testbed
+
 OUT_DNSX="/tmp/OUTPUT-dnsx.jsonl"
 
 dnsx
@@ -11,7 +14,7 @@ while read -r JSON; do
 		echo "$IDENTIFIER - $TARGET - NO DETECTIONS";
 	else
 		HNAME=$(jq -r '.host' <<< "$JSON")
-		curl -u "$OPENSEARCH_USER:$OPENSEARCH_PASSWORD" -k -XPOST "$OPENSEARCH_URL/scan-dnsx/_doc/$IDENTIFIER" --json "$JSON" --silent 1>/dev/null
+		curl -u "$OPENSEARCH_USER:$OPENSEARCH_PASSWORD" -k -XPOST "$OPENSEARCH_URL/$OSIndex/_doc/$IDENTIFIER" --json "$JSON" --silent 1>/dev/null
 		echo "DNSX DISCOVERED: $HNAME";
 	fi
 done;

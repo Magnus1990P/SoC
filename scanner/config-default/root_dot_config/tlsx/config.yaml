@@ -36,8 +36,8 @@ cipher: true
 hash: "sha1"
 
 jarm: false
-ja3: true
-ja3s: true
+ja3: false
+ja3s: false
 wildcard-cert: true
 
 # display tls probe status
@@ -73,10 +73,10 @@ resolvers:
 #rev-ptr-sni: false
 
 # minimum tls version to accept (ssl30,tls10,tls11,tls12,tls13)
-#min-version: "ssl30"
+min-version: "ssl30"
 
 # maximum tls version to accept (ssl30,tls10,tls11,tls12,tls13)
-#max-version: "tls13"
+max-version: "tls13"
 
 # include certificates in json output (pem format)
 certificate: true
@@ -85,7 +85,7 @@ certificate: true
 tls-chain: true
 
 # enable verification of server certificate
-#verify-cert: true
+verify-cert: true
 
 # openssl binary path
 #openssl-binary: 

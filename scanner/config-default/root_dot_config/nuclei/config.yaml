@@ -15,20 +15,17 @@ leave-default-ports: false
 
 # enable loading code protocol-based templates
 #code: false
-disable-unsigned-templates: true
+disable-unsigned-templates: false
 
 # templates to run based on severity. possible values: info, low, medium, high, critical, unknown
 severity:
   - critical
   - high
   - medium
-  - unknown
-#  - low
-#  - info
-exclude-severity:
-  - info
   - low
-#  - unknown
+  - info
+exclude-severity:
+  - unknown
 
 type:
   - cloud
@@ -37,16 +34,14 @@ type:
   - http
   - javascript
   - network
+  - workflow
 exclude-type:
   - ssl
   - passive
   - code
   - dast
   - headless
-  - workflows
-exclude-templates:
-  - http/technologies/tech-detect
-  - http/fuzzing/waf-fuzz.yaml
+#exclude-templates:
 
 # output file to write found issues/vulnerabilities
 output: "/tmp/OUTPUT-nuclei.jsonl"
@@ -58,7 +53,7 @@ omit-raw: false
 
 follow-redirects: false
 follow-host-redirects: false
-max-redirects: 3
+max-redirects: 2
 disable-redirects: true
 
 # custom header/cookie to include in all http request in header:value format (cli, file)
@@ -113,13 +108,13 @@ scan-strategy: host-spray
 #scan-strategy: template-spray
 
 # maximum number of templates to be executed in parallel
-concurrency: 20
+concurrency: 25
 
 # maximum number of hosts to be analyzed in parallel per template
-bulk-size: 2
+bulk-size: 4
 
 # maximum number of requests to send per second
-rate-limit: 250
+rate-limit: 1000
 
 # maximum number of javascript runtimes to be executed in parallel
 js-concurrency: 50
@@ -128,7 +123,7 @@ js-concurrency: 50
 payload-concurrency: 15
 
 # http probe concurrency with httpx
-probe-concurrency: 750
+probe-concurrency: 500
 
 timeout: 2
 retries: 2
@@ -136,7 +131,7 @@ retries: 2
 # disable skipping host from scan based on errors
 no-mhe: false
 # max errors for a host before skipping from scan
-max-host-error: 150
+max-host-error: 100
 
 # use a project folder to avoid sending same request multiple times
 project: true

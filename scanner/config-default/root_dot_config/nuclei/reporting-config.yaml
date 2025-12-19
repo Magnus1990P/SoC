@@ -12,4 +12,4 @@ elasticsearch:
   ssl-verification: false
   username: "admin"
   password: "CHANGE_ME"
-  index-name: "scan-vulnerability"
+  index-name: "ObiWanKenobi"

@@ -1,0 +1,20 @@
+tags:
+  - "dos"
+  - "brute-force"
+  - "fuzz"
+
+files:
+  - http/miscellaneous/external-service-interaction.yaml
+  - http/cves/2019/CVE-2019-14696.yaml
+  - http/cves/2021/CVE-2021-28164.yaml
+  - http/technologies/tech-detect
+  - http/fuzzing/waf-fuzz.yaml
+  - http/fuzzing/wordpress-themes-detect.yaml
+  - http/fuzzing/mdb-database-file.yaml
+  - http/fuzzing/iis-shortname.yaml
+  - dns/ptr-fingerprint.yaml
+  - dns/soa-detect.yaml
+  - dast/vulnerabilities/sqli/time-based-sqli.yaml
+  - javascript/enumeration/pop3/pop3-capabilities-enum.yaml
+  - javascript/enumeration/redis/redis-require-auth.yaml
+  - javascript/enumeration/minecraft-enum.yaml

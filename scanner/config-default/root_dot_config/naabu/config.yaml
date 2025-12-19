@@ -1,15 +1,15 @@
 # File containing list of targets
-list: "/tmp/targets-ips.txt"
+list: "/tmp/targets-hosts.txt"
 exclude-file: "/tmp/excluded-ips.txt"
-ports-file: "/tmp/portlist.txt"
+ports-file: "/tmp/excluded-ports.txt"
 # top ports to scan [full,100,1000]
 #top-ports: 1000
 #exclude-ports: 
 exclude-cdn: true
 display-cdn: true
 
-c: 200
-rate: 2000
+c: 250
+rate: 3000
 
 # disable automatic naabu update check
 disable-update-check: true
@@ -39,7 +39,7 @@ arp-ping: false
 service-discovery: false
 service-version: false
 # number of retries for the port scan
-retries: 3
+retries: 2
 
 # millisecond to wait before timing out
 timeout: 2000
