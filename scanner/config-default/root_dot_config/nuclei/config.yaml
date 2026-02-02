@@ -113,7 +113,7 @@ js-concurrency: 50
 payload-concurrency: 15
 
 # http probe concurrency with httpx
-probe-concurrency: 500
+probe-concurrency: 1000
 
 timeout: 2
 retries: 2
@@ -139,7 +139,7 @@ headless: false
 headless-bulk-size: 5
 # maximum number of headless templates to be executed in parallel
 headless-concurrency: 5
-page-timeout: 3
+page-timeout: 2
 show-browser: false
 #headless-options: []
 #system-chrome: false

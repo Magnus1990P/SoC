@@ -47,3 +47,4 @@ timeout: 2000
 # ping probes for verification of host
 #ping: true
 verify: false
+silent: false
