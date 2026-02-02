@@ -1,6 +1,6 @@
 list: "/tmp/targets-domain.txt"
 
-sources: ["alienvault", "anubis", "c99", "commoncrawl", "crtsh", "digitorus", "dnsdumpster", "hackertarget", "hudsonrock", "intelx", "rapiddns", "shodan", "sitedossier", "threatcrowd", "waybackarchive", "virustotal"]
+sources: ["alienvault", "anubis", "commoncrawl", "crtsh", "digitorus", "dnsdumpster", "hackertarget", "hudsonrock", "intelx", "rapiddns", "shodan", "sitedossier", "threatcrowd", "waybackarchive", "virustotal"]
 
 recursive: true
 all: false

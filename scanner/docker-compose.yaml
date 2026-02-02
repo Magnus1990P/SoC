@@ -20,12 +20,16 @@ services:
         target: /tmp/targets-domain.txt
       - source: targets_excluded 
         target: /tmp/excluded-hosts.txt
+      - source: portfile 
+        target: /tmp/portlist.txt
     deploy:
       resources:
         limits:
           cpus: '2.5'
           memory: '2.5G'
 configs:
+  portfile:
+    file: ${PORTS_FILE}
   targets_domain:
     file: ${TARGET_FILE}
   targets_excluded:

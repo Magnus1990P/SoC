@@ -8,7 +8,7 @@ ports-file: "/tmp/excluded-ports.txt"
 exclude-cdn: true
 display-cdn: true
 
-c: 250
+c: 300
 rate: 3000
 
 # disable automatic naabu update check
@@ -39,7 +39,7 @@ arp-ping: false
 service-discovery: false
 service-version: false
 # number of retries for the port scan
-retries: 2
+retries: 1
 
 # millisecond to wait before timing out
 timeout: 2000
@@ -47,4 +47,3 @@ timeout: 2000
 # ping probes for verification of host
 #ping: true
 verify: false
-silent: false

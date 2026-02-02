@@ -1,24 +1,8 @@
 list: "/tmp/targets-hosts.txt"
-port:
-  - 22
-  - 443
-  - 8443
-  - 10443
-  - 465
-  - 995
-  - 563
-  - 993
-  - 995
-  - 989
-  - 990
-  - 444
-  - 2525
-  - 2222
-  - 4444
-
+port: "/tmp/portlist-tls.txt"
 
 # tls connection mode to use (ctls, ztls, openssl, auto)
-scan-mode: "auto"
+scan-mode: "openssl"
 
 # enable pre-handshake tls connection (early termination) using ztls
 #pre-handshake: false
@@ -62,6 +46,7 @@ revoked: true
 untrusted: true
 
 resolvers:
+  - 1.1.1.1
   - 9.9.9.9
   - 1.0.0.1
   - 76.223.122.150
@@ -73,19 +58,20 @@ resolvers:
 #rev-ptr-sni: false
 
 # minimum tls version to accept (ssl30,tls10,tls11,tls12,tls13)
-min-version: "ssl30"
+#SSL30 is non functional
+min-version: "tls10"
 
 # maximum tls version to accept (ssl30,tls10,tls11,tls12,tls13)
 max-version: "tls13"
 
 # include certificates in json output (pem format)
-certificate: true
+certificate: false
 
 # include certificates chain in json output
-tls-chain: true
+tls-chain: false
 
 # enable verification of server certificate
-verify-cert: true
+verify-cert: false
 
 # openssl binary path
 #openssl-binary: 
@@ -100,7 +86,7 @@ concurrency: 500
 cipher-concurrency: 25
 
 # tls connection timeout in seconds
-timeout: 3
+timeout: 5
 
 # number of retries to perform for failures
 retry: 2
@@ -120,3 +106,4 @@ no-color: false
 verbose: true
 version: false
 hc: false
+

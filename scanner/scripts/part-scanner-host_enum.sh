@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+OSIndex=scan-host
+OSIndex=testbed
+
 TF_DOMAIN="/tmp/targets-domain.txt"
 TF_HOSTS="/tmp/targets-hosts.txt"
 TF_IPS="/tmp/targets-ips.txt"
@@ -19,7 +22,7 @@ while read -r JSON; do
 	else
 		HNAME=$(jq -r '.host' <<< "$JSON")
 		IP=$(jq -r '.ip' <<< "$JSON")
-		curl -u "$OPENSEARCH_USER:$OPENSEARCH_PASSWORD" -k -XPOST "$OPENSEARCH_URL/scan-host/_doc/$IDENTIFIER" --json "$JSON" --silent 1>/dev/null
+		curl -u "$OPENSEARCH_USER:$OPENSEARCH_PASSWORD" -k -XPOST "$OPENSEARCH_URL/$OSIndex/_doc/$IDENTIFIER" --json "$JSON" --silent 1>/dev/null
 		echo "$IP" >> "$TF_IPS"
 		echo "$IP" >> "$TF_HOSTS"
 		echo "$HNAME" >> "$TF_HOSTS"
