@@ -68,7 +68,7 @@ services:
     volumes:
       - dashboard-data:/usr/share/opensearch-dashboards/data
     depends_on:
-      - opensearch:
+      opensearch:
         condition: service_healthy
     healthcheck:
       test:
