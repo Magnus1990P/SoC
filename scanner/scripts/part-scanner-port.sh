@@ -3,6 +3,7 @@
 OSIndex=scan-port
 OSIndex=testbed
 
+$TF_NUCLEI="/tmp/targets-hosts.txt"
 
 ###################################
 ##	PORT SCANNING WITH NMAP
@@ -15,7 +16,7 @@ nmap -Pn -sU -sT --open \
 	--max-retries 0 --min-rate 250 --max-rate 2000 \
 	-iL "$TARGETFILE" \
 	-p "T:$(paste -d, -s $PORTS_TCP),U:$(paste -d, -s $PORTS_UDP)" \
-	-oA "/tmp/OUTPUT-nmap"
+	-oX "/tmp/OUTPUT-nmap.xml"
 
 
 python3 ./parser-nmap-xml.py | while read -r JSON; do 
@@ -32,10 +33,11 @@ python3 ./parser-nmap-xml.py | while read -r JSON; do
 		
 		echo "OPEN PORT: $IP : $PROT/$PORT";
 		echo "$IP:$PORT" >> $TF_NUCLEI
-		if [[ "$HOST" -ne "None" ]]; then
+		if [[ "$HOST" != "None" ]]; then
 			echo "$HOST:$PORT" >> $TF_NUCLEI
 		fi
 	fi
+done;
 
 
 ###################################

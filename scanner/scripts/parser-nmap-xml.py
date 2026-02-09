@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
+import json
 import xml.etree.ElementTree as ET
 from datetime import datetime
-from zoneinfo import ZoneInfo
 
-tree = ET.parse("../OUTPUT-nmap.xml")
+tree = ET.parse("/tmp/OUTPUT-nmap.xml")
 root = tree.getroot()
 
-timestamp = datetime.now(ZoneInfo("UTC"))
+timestamp = datetime.now()
 
 for host in root.iter("host"):
     address = host.find("address").attrib["addr"]
@@ -20,8 +20,8 @@ for host in root.iter("host"):
 
         if hostnames:
             for hostname in hostnames:
-                print({"@timestamp": timestamp.__str__(), "ip":address, "host": hostname, 
-                       "protocol": protocol, "port": portnum, "service": service})
+                print(json.dumps({"@timestamp": timestamp.__str__(), "ip":address, "host": hostname, 
+                       "protocol": protocol, "port": portnum, "service": service}))
         else:
-            print({"@timestamp": timestamp.__str__(), "ip":address, "host": None, 
-                    "protocol": protocol, "port": portnum, "service": service})
+            print(json.dumps({"@timestamp": timestamp.__str__(), "ip":address, "host": None, 
+                              "protocol": protocol, "port": portnum, "service": service}))
