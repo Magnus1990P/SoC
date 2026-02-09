@@ -29,9 +29,9 @@ python3 ./parser-nmap-xml.py | while read -r JSON; do
 		PROT=$(jq -r '.protocol' <<< "$JSON")
 		HOST=$(jq -r '.host' <<< "$JSON")
 
-		curl -u "$OPENSEARCH_USER:$OPENSEARCH_PASSWORD" -k -XPOST "$OPENSEARCH_URL/$OSIndex/_doc/$IDENTIFIER" --json "$JSON" --silent 1>/dev/null
+		curl -u "$OPENSEARCH_USER:$OPENSEARCH_PASSWORD" -k -XPOST "$OPENSEARCH_URL/$OSIndex/_doc/$IDENTIFIER" --json "$JSON" #--silent 1>/dev/null
 		
-		echo "OPEN PORT: $IP : $PROT/$PORT";
+		echo "OPEN PORT: $IP : $PROT/$PORT"
 		echo "$IP:$PORT" >> $TF_NUCLEI
 		if [[ "$HOST" != "None" ]]; then
 			echo "$HOST:$PORT" >> $TF_NUCLEI
@@ -39,6 +39,7 @@ python3 ./parser-nmap-xml.py | while read -r JSON; do
 	fi
 done;
 
+cat   $TF_NUCLEI
 
 ###################################
 ##	GENERATE NUCLEI FILE
