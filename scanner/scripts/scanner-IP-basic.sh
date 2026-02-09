@@ -7,7 +7,7 @@ cp /tmp/targets-domain.txt "/tmp/targets-ips.txt"
 
 ###################################################
 ##  TLS SCAN
-#./part-scanner-tls.sh
+./part-scanner-tls.sh
 
 ###################################################
 ##  PORT SCAN
