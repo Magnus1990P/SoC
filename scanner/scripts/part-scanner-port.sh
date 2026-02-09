@@ -29,6 +29,8 @@ python3 ./parser-nmap-xml.py | while read -r JSON; do
 		PROT=$(jq -r '.protocol' <<< "$JSON")
 		HOST=$(jq -r '.host' <<< "$JSON")
 
+		echo $JSON
+
 		curl -u "$OPENSEARCH_USER:$OPENSEARCH_PASSWORD" -k -XPOST "$OPENSEARCH_URL/$OSIndex/_doc/$IDENTIFIER" --json "$JSON" #--silent 1>/dev/null
 		
 		echo "OPEN PORT: $IP : $PROT/$PORT"
