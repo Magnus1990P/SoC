@@ -10,7 +10,7 @@ RUN nix-channel --update && \
     nix-env --install jq curl gawk git-minimal openssl \
                 ruby perl python3-minimal go \
                 dnsx tlsx subfinder naabu nuclei \
-                rustscan
+                nmap
 
 ADD ./config-default/root_dot_config/  /root/.config/
 ADD ./config/root_dot_config/  /root/.config/

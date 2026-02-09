@@ -3,27 +3,45 @@
 OSIndex=scan-port
 OSIndex=testbed
 
-TF_NUCLEI="/tmp/targets-nuclei.txt"
-OUT_NAABU="/tmp/OUTPUT-naabu.jsonl"
 
-#naabu
-naabu -p $(cat /tmp/portlist.txt)
+###################################
+##	PORT SCANNING WITH NMAP
+##
+TARGETFILE=/tmp/targets-ips.txt
+PORTS_TCP=/tmp/portlist-tcp.txt
+PORTS_UDP=/tmp/portlist-udp.txt
+nmap -Pn -sU -sT --open \
+	--host-timeout 15m --max-rtt-timeout 2500ms \
+	--max-retries 0 --min-rate 250 --max-rate 2000 \
+	-iL "$TARGETFILE" \
+	-p "T:$(paste -d, -s $PORTS_TCP),U:$(paste -d, -s $PORTS_UDP)" \
+	-oA "/tmp/OUTPUT-nmap"
 
-cat "$OUT_NAABU" | grep -v '^null:' | \
-while read -r JSON; do
+
+python3 ./parser-nmap-xml.py | while read -r JSON; do 
 	IDENTIFIER=$(echo "$JSON" | md5sum | awk '{print $1}');
 	if [[ -z "$JSON" ]]; then
-		echo "$IDENTIFIER - $TARGET - NO DETECTIONS";
-	else 
-		HNAME=$(jq -r '.host' <<< "$JSON")
+		echo "$IDENTIFIER - NO DETECTIONS";
+	else
 		IP=$(jq -r '.ip' <<< "$JSON")
 		PORT=$(jq -r '.port' <<< "$JSON")
-		curl -u "$OPENSEARCH_USER:$OPENSEARCH_PASSWORD" -k -XPOST "$OPENSEARCH_URL/$OSIndex/_doc/$IDENTIFIER" --json "$JSON" --silent 1>/dev/null
-		echo "PORT DISCOVERED: $HNAME - $IP - $PORT";
-		echo "$IP:$PORT" >> $TF_NUCLEI
-		echo "$HNAME:$PORT" >> $TF_NUCLEI
-	fi
-done;
+		PROT=$(jq -r '.protocol' <<< "$JSON")
+		HOST=$(jq -r '.host' <<< "$JSON")
 
-cat "$TF_NUCLEI" | grep -v "^null" | sort | uniq >> "$TF_NUCLEI.tmp"
-mv "$TF_NUCLEI.tmp" "$TF_NUCLEI"
+		curl -u "$OPENSEARCH_USER:$OPENSEARCH_PASSWORD" -k -XPOST "$OPENSEARCH_URL/$OSIndex/_doc/$IDENTIFIER" --json "$JSON" --silent 1>/dev/null
+		
+		echo "OPEN PORT: $IP : $PROT/$PORT";
+		echo "$IP:$PORT" >> $TF_NUCLEI
+		if [[ "$HOST" -ne "None" ]]; then
+			echo "$HOST:$PORT" >> $TF_NUCLEI
+		fi
+	fi
+
+
+###################################
+##	GENERATE NUCLEI FILE
+##
+if [[ -s "$TF_NUCLEI" ]]; then
+	cat "$TF_NUCLEI" | grep -v "^null" | sort | uniq >> "$TF_NUCLEI.tmp"
+	mv "$TF_NUCLEI.tmp" "$TF_NUCLEI"
+fi
