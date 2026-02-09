@@ -3,7 +3,7 @@
 OSIndex=scan-port
 OSIndex=testbed
 
-$TF_NUCLEI="/tmp/targets-hosts.txt"
+TF_NUCLEI="/tmp/targets-hosts.txt"
 
 ###################################
 ##	PORT SCANNING WITH NMAP
