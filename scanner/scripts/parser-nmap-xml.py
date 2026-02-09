@@ -20,10 +20,10 @@ for host in root.iter("host"):
 
         if hostnames:
             for hostname in hostnames:
-                print(json.dumps({"@timestamp": timestamp.__str__(), "timestamp": timestamp.__str__(),
+                print(json.dumps({"@timestamp": timestamp.__str__()+"+0000", "timestamp": timestamp.__str__()+"+0000",
                                   "ip":address, "host": hostname, 
                                     "protocol": protocol, "port": portnum, "tls": None, "service": service}))
         else:
-            print(json.dumps({"@timestamp": timestamp.__str__(), "timestamp": timestamp.__str__(), 
+            print(json.dumps({"@timestamp": timestamp.__str__()+"+0000", "timestamp": timestamp.__str__()+"+0000", 
                               "ip":address, "host": None, 
                               "protocol": protocol, "port": portnum, "tls": None, "service": service}))
